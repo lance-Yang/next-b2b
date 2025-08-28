@@ -8,7 +8,7 @@ import { useI18n } from '@/lib/i18n'
 
 export function CTASection() {
   const { t } = useI18n()
-  
+  // mainColorLight
   return (
     <section className="py-16 sm:py-20 bg-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">

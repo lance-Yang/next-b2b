@@ -444,3 +444,19 @@
   background: rgba(255, 255, 255, 0.4) !important;
   transform: scale(1.1) !important;
 }
+
+/* 产品分类卡片动画优化 */
+.product-category-card {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform, opacity;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+}
+
+.product-category-card * {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
