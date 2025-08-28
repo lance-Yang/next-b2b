@@ -2,6 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 自定义工具类 */
+@layer utilities {
+  .text-shadow-sm {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .text-shadow-md {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  }
+  
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  }
+  
+  .text-shadow-xl {
+    text-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+  }
+  
+  /* 轮播图性能优化 */
+  .carousel-container {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+  }
+  
+  .smooth-transition {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
 /* 基本CSS变量定义 */
 :root {
     /* 默认主题色 - 通用变量 */
@@ -362,4 +396,51 @@
 .theme-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Hero Swiper 自定义样式 */
+.hero-swiper .swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.5) !important;
+  width: 12px !important;
+  height: 12px !important;
+  margin: 0 4px !important;
+  opacity: 1 !important;
+  transition: all 0.3s ease !important;
+}
+
+.hero-swiper .swiper-pagination-bullet-active {
+  background: white !important;
+  transform: scale(1.25) !important;
+}
+
+.hero-swiper .swiper-pagination-bullet:hover {
+  background: rgba(255, 255, 255, 0.75) !important;
+}
+
+/* Fade 效果优化 */
+.hero-swiper .swiper-slide {
+  opacity: 0 !important;
+  transition-property: opacity !important;
+}
+
+.hero-swiper .swiper-slide-active {
+  opacity: 1 !important;
+}
+
+/* Swiper 导航按钮优化 */
+.hero-swiper .swiper-button-prev,
+.hero-swiper .swiper-button-next {
+  color: white !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-radius: 50% !important;
+  width: 48px !important;
+  height: 48px !important;
+  margin-top: -24px !important;
+  transition: all 0.3s ease !important;
+}
+
+.hero-swiper .swiper-button-prev:hover,
+.hero-swiper .swiper-button-next:hover {
+  background: rgba(255, 255, 255, 0.4) !important;
+  transform: scale(1.1) !important;
 }

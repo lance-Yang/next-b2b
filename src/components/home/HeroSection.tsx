@@ -1,198 +1,201 @@
 "use client"
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
+import Image from 'next/image'
+import { motion } from 'framer-motion'
+import { ArrowRight } from 'lucide-react'
 import { useI18n } from '@/lib/i18n'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import type { Swiper as SwiperType } from 'swiper'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/effect-fade'
+import { Navigation, Autoplay, Pagination, EffectFade } from 'swiper/modules'
 
 // 轮播图数据
 const slides = [
   {
     id: 1,
-    title: 'Discover Smart\nSolutions to Boost Your\nProductivity.',
-    subtitle: 'Transform your business with innovative technology solutions',
-    primaryButton: 'Get A Free Quote',
-    secondaryButton: 'Discover More',
-    background: 'linear-gradient(135deg, #06B6D4 0%, #F59E0B 50%, #EC4899 100%)',
+    title: 'Professional\nBusiness Solutions\nfor Modern Enterprises',
+    subtitle: 'Elevate your business with cutting-edge technology and innovative strategies that drive growth and success',
+    primaryButton: 'Start Your Journey',
+    secondaryButton: 'Learn More',
+    background: '/home/1750126326881.webp',
   },
   {
     id: 2,
-    title: 'Innovative Products\nfor Modern\nBusinesses.',
-    subtitle: 'Streamline your operations with cutting-edge tools and services',
-    primaryButton: 'View Products',
-    secondaryButton: 'Learn More',
-    background: 'linear-gradient(135deg, #10B981 0%, #3B82F6 50%, #8B5CF6 100%)',
+    title: 'Digital Transformation\nMade Simple\nand Effective',
+    subtitle: 'Transform your operations with our comprehensive digital solutions designed for the future of business',
+    primaryButton: 'Get Started Today',
+    secondaryButton: 'View Solutions',
+    background: '/home/1750126330116.webp',
   },
   {
     id: 3,
-    title: 'Excellence in\nService and\nSupport.',
-    subtitle: 'Experience world-class customer service and technical support',
-    primaryButton: 'Contact Us',
-    secondaryButton: 'Our Services',
-    background: 'linear-gradient(135deg, #F59E0B 0%, #EF4444 50%, #EC4899 100%)',
+    title: 'Excellence in\nCustomer Experience\nand Service Quality',
+    subtitle: 'Deliver exceptional customer experiences with our world-class support and innovative service solutions',
+    primaryButton: 'Contact Our Team',
+    secondaryButton: 'Explore Services',
+    background: '/home/1750126333491.webp',
   },
 ]
 
 export function HeroSection() {
   const { t } = useI18n()
   const [currentSlide, setCurrentSlide] = useState(0)
-  const [isAutoPlay, setIsAutoPlay] = useState(true)
+  const swiperRef = useRef(null)
   
-  // 自动轮播
+  // 预加载所有图片
   useEffect(() => {
-    if (!isAutoPlay) return
-    
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length)
-    }, 5000) // 5秒切换一次
-    
-    return () => clearInterval(timer)
-  }, [isAutoPlay])
-  
-  // 用户手动操作后重新启动自动轮播
-  const resetAutoPlay = () => {
-    setIsAutoPlay(false)
-    setTimeout(() => setIsAutoPlay(true), 10000) // 10秒后重新启动自动轮播
-  }
-  
-  // 上一张
-  const prevSlide = () => {
-    console.log('点击上一张，当前幻灯片:', currentSlide)
-    resetAutoPlay()
-    setCurrentSlide((prev) => {
-      const newSlide = (prev - 1 + slides.length) % slides.length
-      console.log('切换到幻灯片:', newSlide)
-      return newSlide
+    slides.forEach((slide) => {
+      const img = new window.Image()
+      img.src = slide.background
     })
-  }
+  }, [])
   
-  // 下一张
-  const nextSlide = () => {
-    console.log('点击下一张，当前幻灯片:', currentSlide)
-    resetAutoPlay()
-    setCurrentSlide((prev) => {
-      const newSlide = (prev + 1) % slides.length
-      console.log('切换到幻灯片:', newSlide)
-      return newSlide
-    })
-  }
-  
-  // 跳转到指定幻灯片
-  const goToSlide = (index: number) => {
-    console.log('点击指示器，跳转到幻灯片:', index)
-    resetAutoPlay()
-    setCurrentSlide(index)
+  // 处理幻灯片变化
+  const handleSlideChange = (swiper: SwiperType) => {
+    setCurrentSlide(swiper.realIndex)
   }
   
   const currentSlideData = slides[currentSlide]
   
   return (
     <section className="relative h-[500px] lg:h-[600px] overflow-hidden">
-      {/* 背景图片 */}
-      <motion.div 
-        key={currentSlide}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          background: currentSlideData.background
+      <Swiper
+        ref={swiperRef}
+        className="w-full h-full hero-swiper"
+        modules={[Navigation, Autoplay, Pagination, EffectFade]}
+        spaceBetween={0}
+        slidesPerView={1}
+        navigation={{
+          nextEl: ".hero-swiper-next",
+          prevEl: ".hero-swiper-prev",
         }}
-      />
-      
-      {/* 覆盖层 */}
-      <div className="absolute inset-0 bg-black/20" />
-      
-      {/* 左右箭头导航 */}
-      <button 
-        onClick={(e) => {
-          e.preventDefault()
-          e.stopPropagation()
-          prevSlide()
+        pagination={{
+          el: ".hero-swiper-pagination",
+          clickable: true,
+          renderBullet: (index, className) => {
+            return `<span class="${className} !bg-white/50 !w-3 !h-3 hover:!bg-white/75 transition-all duration-300"></span>`;
+          },
         }}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/20 hover:bg-white/30 transition-all duration-200 hover:scale-110 cursor-pointer border-none outline-none"
-        aria-label="Previous slide"
-        type="button"
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+        }}
+        speed={800}
+        effect="fade"
+        fadeEffect={{
+          crossFade: true,
+        }}
+        loop={slides.length > 1}
+        onSlideChange={handleSlideChange}
       >
-        <ChevronLeft className="w-6 h-6 text-white" />
-      </button>
-      <button 
-        onClick={(e) => {
-          e.preventDefault()
-          e.stopPropagation()
-          nextSlide()
-        }}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/20 hover:bg-white/30 transition-all duration-200 hover:scale-110 cursor-pointer border-none outline-none"
-        aria-label="Next slide"
-        type="button"
-      >
-        <ChevronRight className="w-6 h-6 text-white" />
-      </button>
-      
-      {/* 中心内容 */}
-      <div className="relative z-10 h-full flex items-center justify-center">
-        <div className="text-center text-white px-4 max-w-4xl mx-auto">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentSlide}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
-                {currentSlideData.title.split('\n').map((line, index) => (
-                  <span key={index} className="block">
-                    {line}
-                  </span>
-                ))}
-              </h1>
+        {slides.map((slide, index) => (
+          <SwiperSlide key={slide.id}>
+            <div className="relative w-full h-full">
+              {/* 背景图片 */}
+              <Image
+                src={slide.background}
+                alt={slide.title.replace(/\n/g, ' ')}
+                fill
+                priority={index === 0}
+                quality={90}
+                sizes="100vw"
+                className="object-cover object-center"
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+              />
               
-              <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-                {currentSlideData.subtitle}
-              </p>
+              {/* 覆盖层 */}
+              <div className="absolute inset-0 bg-black/40" />
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Link
-                  href="/products"
-                  className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-lg font-semibold transition-colors inline-flex items-center gap-2 text-lg cursor-pointer"
-                >
-                  {t.GetAFreeQuote || currentSlideData.primaryButton}
-                  <ArrowRight className="w-5 h-5" />
-                </Link>
-                <Link
-                  href="/about"
-                  className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg font-semibold transition-all text-lg cursor-pointer"
-                >
-                  {t.ViewMore || currentSlideData.secondaryButton}
-                </Link>
+              {/* 中心内容 */}
+              <div className="relative z-10 h-full flex items-center justify-center">
+                <div className="text-center text-white px-4 max-w-4xl mx-auto">
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                  >
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 text-shadow-lg drop-shadow-lg">
+                      {slide.title.split('\n').map((line, lineIndex) => (
+                        <span key={lineIndex} className="block">
+                          {line}
+                        </span>
+                      ))}
+                    </h1>
+                    
+                    <p className="text-lg md:text-xl text-white/95 mb-8 max-w-2xl mx-auto drop-shadow-md">
+                      {slide.subtitle}
+                    </p>
+                    
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      >
+                        <Link
+                          href="/products"
+                          className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-lg font-semibold transition-colors inline-flex items-center gap-2 text-lg cursor-pointer"
+                        >
+                          {t.GetAFreeQuote || slide.primaryButton}
+                          <ArrowRight className="w-5 h-5" />
+                        </Link>
+                      </motion.div>
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      >
+                        <Link
+                          href="/about"
+                          className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg font-semibold transition-all text-lg cursor-pointer"
+                        >
+                          {t.ViewMore || slide.secondaryButton}
+                        </Link>
+                      </motion.div>
+                    </div>
+                  </motion.div>
+                </div>
               </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </div>
-      
-      {/* 底部指示器 */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-3 z-20">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            onClick={(e) => {
-              e.preventDefault()
-              e.stopPropagation()
-              goToSlide(index)
-            }}
-            className={`w-3 h-3 rounded-full transition-all duration-300 cursor-pointer border-none outline-none ${
-              index === currentSlide 
-                ? 'bg-white scale-125' 
-                : 'bg-white/50 hover:bg-white/75'
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
-            type="button"
-          />
+            </div>
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
+      
+      {/* 自定义导航按钮 */}
+      {slides.length > 1 && (
+        <>
+          <motion.button 
+            className="hero-swiper-prev absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/20 hover:bg-white/40 transition-all duration-200 cursor-pointer border-none outline-none"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            aria-label="Previous slide"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 text-white">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
+          </motion.button>
+          <motion.button 
+            className="hero-swiper-next absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/20 hover:bg-white/40 transition-all duration-200 cursor-pointer border-none outline-none"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            aria-label="Next slide"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 text-white">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+          </motion.button>
+        </>
+      )}
+      
+      {/* 自定义分页指示器 */}
+      <div className="hero-swiper-pagination absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex space-x-3"></div>
     </section>
   )
 }
