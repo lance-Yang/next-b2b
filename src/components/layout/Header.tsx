@@ -3,130 +3,231 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShoppingCart, User, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navigationItems = [
-  { name: "Home", href: "/" },
-  { name: "Products", href: "/products" },
-  { name: "Services", href: "/services" },
-  { name: "About", href: "/about" },
-  { name: "Contact", href: "/contact" },
+  { name: "首页", href: "/" },
+  { name: "产品", href: "/products" },
+  { name: "服务", href: "/services" },
+  { name: "关于我们", href: "/about" },
+  { name: "联系我们", href: "/contact" },
 ];
+
+// 主题配置
+const themes = {
+  orange: {
+    name: "橙色主题",
+    className: "theme-orange",
+  },
+  blue: {
+    name: "蓝色主题",
+    className: "theme-blue",
+  },
+  green: {
+    name: "绿色主题",
+    className: "theme-green",
+  },
+  purple: {
+    name: "紫色主题",
+    className: "theme-purple",
+  },
+} as const;
+
+type ThemeKey = keyof typeof themes;
 
 export function Header() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const [currentTheme, setCurrentTheme] = React.useState<ThemeKey>("orange");
 
-  // return (
-  //   <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-  //     <nav className="container mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top">
-  //       <div className="flex h-16 items-center justify-between">
-  //         {/* Logo */}
-  //         <div className="flex items-center">
-  //           <Link href="/" className="flex items-center space-x-2">
-  //             <span className="text-2xl font-bold text-primary">B2B</span>
-  //             <span className="text-xl font-semibold">Solutions</span>
-  //           </Link>
-  //         </div>
+  // 切换主题的函数
+  const switchTheme = (themeKey: ThemeKey) => {
+    const theme = themes[themeKey];
 
-  //         {/* Desktop Navigation */}
-  //         <div className="hidden md:flex md:items-center md:space-x-8">
-  //           {navigationItems.map((item) => (
-  //             <Link
-  //               key={item.name}
-  //               href={item.href}
-  //               className={cn(
-  //                 "text-sm font-medium transition-colors hover:text-primary",
-  //                 pathname === item.href
-  //                   ? "text-primary"
-  //                   : "text-muted-foreground"
-  //               )}
-  //             >
-  //               {item.name}
-  //             </Link>
-  //           ))}
-  //         </div>
+    // 移除所有主题类
+    Object.values(themes).forEach((t) => {
+      document.documentElement.classList.remove(t.className);
+    });
 
-  //         {/* CTA Button */}
-  //         <div className="hidden md:flex md:items-center">
-  //           <Link
-  //             href="/get-started"
-  //             className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
-  //           >
-  //             Get Started
-  //           </Link>
-  //         </div>
+    // 添加新主题类
+    document.documentElement.classList.add(theme.className);
 
-  //         {/* Mobile menu button */}
-  //         <div className="flex md:hidden">
-  //           <button
-  //             type="button"
-  //             className="inline-flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-  //             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-  //           >
-  //             <span className="sr-only">Open main menu</span>
-  //             {mobileMenuOpen ? (
-  //               <X className="h-6 w-6" aria-hidden="true" />
-  //             ) : (
-  //               <Menu className="h-6 w-6" aria-hidden="true" />
-  //             )}
-  //           </button>
-  //         </div>
-  //       </div>
+    setCurrentTheme(themeKey);
+    console.log(`切换到${theme.name}: ${theme.className}`);
+  };
 
-  //       {/* Mobile menu */}
-  //       {mobileMenuOpen && (
-  //         <div className="md:hidden">
-  //           <div className="space-y-1 pb-3 pt-2">
-  //             {navigationItems.map((item) => (
-  //               <Link
-  //                 key={item.name}
-  //                 href={item.href}
-  //                 className={cn(
-  //                   "block px-3 py-2 text-base font-medium rounded-md transition-colors",
-  //                   pathname === item.href
-  //                     ? "bg-primary/10 text-primary"
-  //                     : "text-muted-foreground hover:bg-gray-50 hover:text-gray-900"
-  //                 )}
-  //                 onClick={() => setMobileMenuOpen(false)}
-  //               >
-  //                 {item.name}
-  //               </Link>
-  //             ))}
-  //             <Link
-  //               href="/get-started"
-  //               className="block w-full text-center rounded-md bg-primary px-3 py-2 text-base font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
-  //               onClick={() => setMobileMenuOpen(false)}
-  //             >
-  //               Get Started
-  //             </Link>
-  //           </div>
-  //         </div>
-  //       )}
-  //     </nav>
-  //   </header>
-  // )
+  // 组件挂载时设置默认主题
+  React.useEffect(() => {
+    switchTheme("orange");
+  }, []);
+
   return (
-    <header className="bg-white shadow-sm px-4 lg:px-4 md:px-4">
-      <nav
-        aria-label="Global"
-        className="h-20 mx-auto max-w-7xl flex items-stretch justify-between"
-      >
-        <div className="flex items-center lg:flex-1">
-          <Link href="/" className="-m-1.5 p-1.5">
-            <span className="sr-only">Logo</span>
-            {/* <img
-              alt="logo"
-              src={`${process.env.NEXT_PUBLIC_BASE_URL}/upload/img/${sectionData.basicSite.site_logo}`}
-              className="h-12 w-auto"
-            /> */}
-          </Link>
+    <div className="sticky top-0 z-50">
+      {/* 测试标题栏 */}
+      {/* <div className="bg-brand-light border-b border-brand-primary/20 px-4 theme-transition">
+        <div className="max-w-7xl mx-auto py-2 flex justify-between items-center">
+          <h1 className="text-brand-primary font-semibold theme-transition">
+            🎨 自定义CSS主题测试 - 当前: {themes[currentTheme].name}
+          </h1>
+          <div className="flex gap-2">
+            {Object.entries(themes).map(([key, theme]) => (
+              <button
+                key={key}
+                onClick={() => switchTheme(key as ThemeKey)}
+                className={cn(
+                  "px-3 py-1 rounded text-sm theme-transition theme-button",
+                  currentTheme === key
+                    ? "bg-brand-primary text-white"
+                    : "bg-white text-brand-primary border border-brand-primary hover:bg-brand-primary hover:text-white"
+                )}
+              >
+                {theme.name}
+              </button>
+            ))}
+          </div>
         </div>
-
-        {/* 客户端导航组件 */}
-        {/* <NavBarClient sectionData={sectionData} /> */}
-      </nav>
-    </header>
+      </div>
+       */}
+      <header
+        className="bg-white shadow-sm px-4 lg:px-4 md:px-4"
+        style={{ position: "relative", zIndex: 55 }}
+      >
+        <nav
+          aria-label="Global"
+          className="h-20 mx-auto max-w-7xl lg:px-8 flex items-stretch"
+        >
+          <div className="flex items-center">
+            <a className="-m-1.5 p-1.5" href="index.html">
+              <span className="sr-only">Logo</span>
+              {/* <img
+                alt="logo"
+                src="upload/img/logo.png.jpeg"
+                className="h-12 w-auto"
+              /> */}
+              Logo
+            </a>
+          </div>
+          <div className="hidden lg:-ml-20 lg:flex lg:flex-1 items-center justify-center">
+            <Link
+              className="px-0 flex items-center justify-center nav-primary hover:text-navHover theme-transition text-base/6 font-semibold nav-item"
+              href="/"
+            >
+              Home
+            </Link>
+            <div className="h-full relative group ml-14">
+              <Link
+                className="px-0 text-gray-900 hover:text-mainColorNormal theme-transition cursor-pointer h-full flex items-center gap-x-0.5 text-base/6 font-semibold nav-item"
+                href="product.html"
+              >
+                Product
+              </Link>
+              <div className="absolute left-0 top-full mt-0.5 z-10 min-w-[200px] w-max bg-white shadow-[0_0_15px_rgba(0,0,0,0.1)] ring-1 ring-gray-900/5 rounded-none transition-all duration-200 opacity-0 invisible translate-y-2">
+                <div className="p-0">
+                  <div className="grid grid-cols-1 gap-0">
+                    <div className="group relative">
+                      <a
+                        className="flex items-center gap-x-4 text-gray-900 nav-hover hover:bg-gray-50 theme-transition whitespace-nowrap relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-0.5 before:bg-current before:opacity-0 hover:before:opacity-100 before:transition-all before:duration-200"
+                        href="product/category/41.html"
+                      >
+                        <div className="w-full">
+                          <div className="p-3 text-sm w-full font-medium transition-transform duration-200 hover:translate-x-2">
+                            Sport Gear
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <div className="group relative">
+                      <a
+                        className="flex items-center gap-x-4 text-gray-900 nav-hover hover:bg-gray-50 theme-transition whitespace-nowrap relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-0.5 before:bg-current before:opacity-0 hover:before:opacity-100 before:transition-all before:duration-200"
+                        href="product/category/40.html"
+                      >
+                        <div className="w-full">
+                          <div className="p-3 text-sm w-full font-medium transition-transform duration-200 hover:translate-x-2">
+                            Outdoor Adventure
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <div className="group relative">
+                      <a
+                        className="flex items-center gap-x-4 text-gray-900 nav-hover hover:bg-gray-50 theme-transition whitespace-nowrap relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-0.5 before:bg-current before:opacity-0 hover:before:opacity-100 before:transition-all before:duration-200"
+                        href="product/category/8.html"
+                      >
+                        <div className="w-full">
+                          <div className="p-3 text-sm w-full font-medium transition-transform duration-200 hover:translate-x-2">
+                            Trendy Apparel
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <div className="group relative">
+                      <a
+                        className="flex items-center gap-x-4 text-gray-900 nav-hover hover:bg-gray-50 theme-transition whitespace-nowrap relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-0.5 before:bg-current before:opacity-0 hover:before:opacity-100 before:transition-all before:duration-200"
+                        href="product/category/7.html"
+                      >
+                        <div className="w-full">
+                          <div className="p-3 text-sm w-full font-medium transition-transform duration-200 hover:translate-x-2">
+                            Fitness Essentials
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <div className="group relative">
+                      <a
+                        className="flex items-center gap-x-4 text-gray-900 nav-hover hover:bg-gray-50 theme-transition whitespace-nowrap relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-0.5 before:bg-current before:opacity-0 hover:before:opacity-100 before:transition-all before:duration-200"
+                        href="product/category/46.html"
+                      >
+                        <div className="w-full">
+                          <div className="p-3 text-sm w-full font-medium transition-transform duration-200 hover:translate-x-2">
+                            Nature Gear
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <Link
+              className="px-0 flex items-center justify-center text-gray-900 nav-hover theme-transition text-base/6 font-semibold ml-14 nav-item"
+              href="about.html"
+            >
+              About Us
+            </Link>
+            <Link
+              className="px-0 flex items-center justify-center text-gray-900 nav-hover theme-transition text-base/6 font-semibold ml-14 nav-item"
+              href="contact.html"
+            >
+              Contact Us
+            </Link>
+          </div>
+          <div className="flex ml-auto lg:hidden">
+            {/* <button
+              type="button"
+              className="-m-2.5 bg-transparent inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+            >
+              <span className="sr-only">Open main menu</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+                data-slot="icon"
+                className="size-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                ></path>
+              </svg>
+            </button> */}
+          </div>
+        </nav>
+      </header>
+    </div>
   );
 }

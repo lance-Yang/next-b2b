@@ -1,13 +1,21 @@
-
-
 const en = {
+    // Navigation related
+    home: "Home",
+    about: "About",
+    product: "Product",
+    products: "Products", 
+    services: "Services",
+    contact: "Contact",
+    
     Home: "Home",
     AboutUs: "About Us",
     ContactUs: "Contact Us",
-    Faq: "Faq",
+    Faq: "FAQ",
     Case: "Case",
     News: "News",
     Product: "Product",
+    Products: "Products",
+    Services: "Services",
     GetInTouch: "Get In Touch",
     // Hero section
     HeroTitle: "Source Directly from Verified Suppliers",
@@ -36,7 +44,7 @@ const en = {
     Contact: "Contact",
     AllRightsReserved: "All rights reserved.",
     FrequentlyAskedQuestions: "Frequently Asked Questions",
-    // SendMessage 组件相关
+    // SendMessage component related
     SendingMessage: "Sending...",
     FillRequiredFields: "Please fill in all required fields (Name, Email, and Message)",
     EnterValidEmail: "Please enter a valid email address",

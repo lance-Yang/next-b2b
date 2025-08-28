@@ -1,4 +1,12 @@
 const zh = {
+    // 导航相关
+    home: "首页",
+    about: "关于我们",
+    product: "产品",
+    products: "产品",
+    services: "服务",
+    contact: "联系我们",
+    
     Home: "首页",
     AboutUs: "关于我们",
     ContactUs: "联系我们",
@@ -6,6 +14,8 @@ const zh = {
     Case: "案例",
     News: "新闻",
     Product: "产品",
+    Products: "产品",
+    Services: "服务",
     GetInTouch: "取得联系",
     GetInTouchTip: "我们随时为您解答任何问题",
     SendUsAMessage: "给我们留言",

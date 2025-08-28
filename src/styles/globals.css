@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* 基本CSS变量定义 */
 :root {
@@ -6,57 +8,80 @@
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
+    /* 当前激活的主题色 - 直接设置为橙色 */
+    --main-color-light: 22 93% 90%;
+    --main-color-normal: 22 93% 55%;
+    --main-color-deep: 22 93% 50%;
+
+    /* 也直接设置对应的模板颜色 */
+    --main-color-light-001: 22 93% 90%;
+    --main-color-normal-001: 22 93% 55%;
+    --main-color-deep-001: 22 93% 50%;
+    
+    /* ========== 新的动态主题系统 ==========
+       默认主题：橙色系 */
+    --nav-primary: 22 93% 55%;    /* 导航栏主色 */
+    --nav-hover: 22 93% 50%;      /* 导航栏悬停色 */
+    --nav-active: 22 93% 40%;     /* 导航栏激活色 */
+    
+    /* 品牌主题色板 */
+    --brand-primary: 22 93% 55%;   /* 主色 */
+    --brand-secondary: 215 100% 50%; /* 辅助色 (蓝色) */
+    --brand-accent: 22 93% 60%;    /* 强调色 */
+    --brand-light: 22 93% 90%;     /* 浅色 */
+    --brand-dark: 22 93% 40%;      /* 深色 */
+    
+    /* 功能性颜色 */
+    --color-success: 142 76% 36%;  /* 成功色 (绿色) */
+    --color-warning: 38 92% 50%;   /* 警告色 (黄色) */
+    --color-error: 0 84% 60%;      /* 错误色 (红色) */
+    --color-info: 217 91% 60%;     /* 信息色 (蓝色) */
 
     /* 模板主题颜色系统 */
-    /* 模板01的颜色 */
-    --main-color-light-001: 105, 55%, 95%;
-    --main-color-normal-001: 105, 55%, 46%;
-    --main-color-deep-001: 105, 55%, 40%;
-
     /* 模板02的颜色 */
-    --main-color-light-002: 36, 100%, 95%;
-    --main-color-normal-002: 36, 100%, 46%;
-    --main-color-deep-002: 36, 100%, 40%;
+    --main-color-light-002: 36 100% 95%;
+    --main-color-normal-002: 36 100% 46%;
+    --main-color-deep-002: 36 100% 40%;
 
     /* 模板03的颜色 */
-    --main-color-light-003: 37, 56%, 95%;
-    --main-color-normal-003: 37, 56%, 57%;
-    --main-color-deep-003: 37, 56%, 50%;
+    --main-color-light-003: 37 56% 95%;
+    --main-color-normal-003: 37 56% 57%;
+    --main-color-deep-003: 37 56% 50%;
 
     /* 模板04的颜色 */
-    --main-color-light-004: 215, 100%, 95%;
-    --main-color-normal-004: 215, 100%, 30%;
-    --main-color-deep-004: 215, 100%, 26%;
+    --main-color-light-004: 215 100% 95%;
+    --main-color-normal-004: 215 100% 30%;
+    --main-color-deep-004: 215 100% 26%;
 
     /* 模板05的颜色 */
-    --main-color-light-005: 216, 100%, 95%;
-    --main-color-normal-005: 216, 100%, 50%;
-    --main-color-deep-005: 216, 100%, 40%;
+    --main-color-light-005: 216 100% 95%;
+    --main-color-normal-005: 216 100% 50%;
+    --main-color-deep-005: 216 100% 40%;
 
     /* 模板06的颜色 */
-    --main-color-light-006: 331, 95%, 95%;
-    --main-color-normal-006: 331, 95%, 68%;
-    --main-color-deep-006: 331, 78%, 63%;
+    --main-color-light-006: 331 95% 95%;
+    --main-color-normal-006: 331 95% 68%;
+    --main-color-deep-006: 331 78% 63%;
 
     /* 模板07的颜色 */
-    --main-color-light-007: 0, 91%, 95%;
-    --main-color-normal-007: 0, 91%, 55%;
-    --main-color-deep-007: 0, 91%, 63%;
+    --main-color-light-007: 0 91% 95%;
+    --main-color-normal-007: 0 91% 55%;
+    --main-color-deep-007: 0 91% 63%;
 
     /* 模板08的颜色 */
-    --main-color-light-008: 136, 60%, 90%;
-    --main-color-normal-008: 136, 60%, 43%;
-    --main-color-deep-008: 136, 60%, 35%;
+    --main-color-light-008: 136 60% 90%;
+    --main-color-normal-008: 136 60% 43%;
+    --main-color-deep-008: 136 60% 35%;
 
     /* 模板09的颜色 */
-    --main-color-light-009: 123, 42%, 90%;
-    --main-color-normal-009: 123, 42%, 56%;
-    --main-color-deep-009: 123, 42%, 50%;
+    --main-color-light-009: 123 42% 90%;
+    --main-color-normal-009: 123 42% 56%;
+    --main-color-deep-009: 123 42% 50%;
 
     /* 模板10的颜色 */
-    --main-color-light-010: 22, 93%, 90%;
-    --main-color-normal-010: 22, 93%, 55%;
-    --main-color-deep-010: 22, 93%, 50%;
+    --main-color-light-010: 22 93% 90%;
+    --main-color-normal-010: 22 93% 55%;
+    --main-color-deep-010: 22 93% 50%;
 }
 
 .btn {
@@ -118,4 +143,223 @@
         --chart-4: 280 65% 60%;
         --chart-5: 340 75% 55%;
     }
+}
+
+/* ========== 自定义主题CSS - 使用CSS类而非CSSS变量 ========== */
+
+/* 橙色主题 */
+.theme-orange {
+  --nav-primary-rgb: 247, 114, 32;
+  --nav-hover-rgb: 229, 90, 0;
+  --nav-active-rgb: 200, 75, 0;
+  
+  --brand-primary-rgb: 247, 114, 32;
+  --brand-secondary-rgb: 51, 153, 255;
+  --brand-light-rgb: 255, 239, 230;
+  --brand-dark-rgb: 229, 90, 0;
+}
+
+.theme-orange .nav-primary {
+  color: rgb(247, 114, 32);
+}
+
+.theme-orange .nav-hover:hover {
+  color: rgb(229, 90, 0);
+}
+
+.theme-orange .bg-brand-primary {
+  background-color: rgb(247, 114, 32);
+}
+
+.theme-orange .bg-brand-light {
+  background-color: rgb(255, 239, 230);
+}
+
+.theme-orange .bg-brand-dark {
+  background-color: rgb(229, 90, 0);
+}
+
+.theme-orange .text-brand-primary {
+  color: rgb(247, 114, 32);
+}
+
+.theme-orange .text-brand-dark {
+  color: rgb(229, 90, 0);
+}
+
+.theme-orange .border-brand-primary {
+  border-color: rgb(247, 114, 32);
+}
+
+/* 蓝色主题 */
+.theme-blue {
+  --nav-primary-rgb: 51, 102, 255;
+  --nav-hover-rgb: 41, 82, 204;
+  --nav-active-rgb: 31, 62, 153;
+  
+  --brand-primary-rgb: 51, 102, 255;
+  --brand-secondary-rgb: 247, 114, 32;
+  --brand-light-rgb: 230, 237, 255;
+  --brand-dark-rgb: 41, 82, 204;
+}
+
+.theme-blue .nav-primary {
+  color: rgb(51, 102, 255);
+}
+
+.theme-blue .nav-hover:hover {
+  color: rgb(41, 82, 204);
+}
+
+.theme-blue .bg-brand-primary {
+  background-color: rgb(51, 102, 255);
+}
+
+.theme-blue .bg-brand-light {
+  background-color: rgb(230, 237, 255);
+}
+
+.theme-blue .bg-brand-dark {
+  background-color: rgb(41, 82, 204);
+}
+
+.theme-blue .text-brand-primary {
+  color: rgb(51, 102, 255);
+}
+
+.theme-blue .text-brand-dark {
+  color: rgb(41, 82, 204);
+}
+
+.theme-blue .border-brand-primary {
+  border-color: rgb(51, 102, 255);
+}
+
+/* 绿色主题 */
+.theme-green {
+  --nav-primary-rgb: 16, 185, 129;
+  --nav-hover-rgb: 5, 150, 105;
+  --nav-active-rgb: 4, 120, 87;
+  
+  --brand-primary-rgb: 16, 185, 129;
+  --brand-secondary-rgb: 139, 92, 246;
+  --brand-light-rgb: 230, 253, 240;
+  --brand-dark-rgb: 5, 150, 105;
+}
+
+.theme-green .nav-primary {
+  color: rgb(16, 185, 129);
+}
+
+.theme-green .nav-hover:hover {
+  color: rgb(5, 150, 105);
+}
+
+.theme-green .bg-brand-primary {
+  background-color: rgb(16, 185, 129);
+}
+
+.theme-green .bg-brand-light {
+  background-color: rgb(230, 253, 240);
+}
+
+.theme-green .bg-brand-dark {
+  background-color: rgb(5, 150, 105);
+}
+
+.theme-green .text-brand-primary {
+  color: rgb(16, 185, 129);
+}
+
+.theme-green .text-brand-dark {
+  color: rgb(5, 150, 105);
+}
+
+.theme-green .border-brand-primary {
+  border-color: rgb(16, 185, 129);
+}
+
+/* 紫色主题 */
+.theme-purple {
+  --nav-primary-rgb: 139, 92, 246;
+  --nav-hover-rgb: 124, 58, 237;
+  --nav-active-rgb: 109, 40, 217;
+  
+  --brand-primary-rgb: 139, 92, 246;
+  --brand-secondary-rgb: 16, 185, 129;
+  --brand-light-rgb: 243, 237, 255;
+  --brand-dark-rgb: 124, 58, 237;
+}
+
+.theme-purple .nav-primary {
+  color: rgb(139, 92, 246);
+}
+
+.theme-purple .nav-hover:hover {
+  color: rgb(124, 58, 237);
+}
+
+.theme-purple .bg-brand-primary {
+  background-color: rgb(139, 92, 246);
+}
+
+.theme-purple .bg-brand-light {
+  background-color: rgb(243, 237, 255);
+}
+
+.theme-purple .bg-brand-dark {
+  background-color: rgb(124, 58, 237);
+}
+
+.theme-purple .text-brand-primary {
+  color: rgb(139, 92, 246);
+}
+
+.theme-purple .text-brand-dark {
+  color: rgb(124, 58, 237);
+}
+
+.theme-purple .border-brand-primary {
+  border-color: rgb(139, 92, 246);
+}
+
+/* 通用样式 */
+.theme-transition {
+  transition: all 0.3s ease;
+}
+
+/* 悬停效果增强 */
+.nav-item {
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.nav-item:hover {
+  transform: translateY(-1px);
+}
+
+/* 按钮样式 */
+.theme-button {
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.theme-button:active {
+  transform: translateY(0);
+}
+
+/* 卡片样式 */
+.theme-card {
+  transition: all 0.3s ease;
+}
+
+.theme-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
