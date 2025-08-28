@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import Link from 'next/link'
 import { 
@@ -5,167 +7,137 @@ import {
   Twitter, 
   Linkedin, 
   Youtube,
+  Instagram,
+  MessageCircle,
   Mail,
   Phone,
   MapPin
 } from 'lucide-react'
 
+
 const footerLinks = {
-  solutions: [
-    { name: 'Enterprise Solutions', href: '/solutions/enterprise' },
-    { name: 'Small Business', href: '/solutions/small-business' },
-    { name: 'Startups', href: '/solutions/startups' },
-    { name: 'Industries', href: '/industries' },
-  ],
-  company: [
+  quickLinks: [
+    { name: 'Home', href: '/' },
+    { name: 'Product', href: '/products' },
     { name: 'About Us', href: '/about' },
-    { name: 'Careers', href: '/careers' },
-    { name: 'Press', href: '/press' },
-    { name: 'Partners', href: '/partners' },
+    { name: 'Contact Us', href: '/contact' },
   ],
-  resources: [
-    { name: 'Blog', href: '/blog' },
-    { name: 'Case Studies', href: '/case-studies' },
-    { name: 'Documentation', href: '/docs' },
-    { name: 'Help Center', href: '/help' },
+  productCategories: [
+    { name: 'Sport Gear', href: '/products/sport-gear' },
+    { name: 'Outdoor Adventure', href: '/products/outdoor' },
+    { name: 'Trendy Apparel', href: '/products/apparel' },
+    { name: 'Fitness Essentials', href: '/products/fitness' },
+    { name: 'Nature Gear', href: '/products/nature' },
   ],
-  legal: [
-    { name: 'Privacy Policy', href: '/privacy' },
-    { name: 'Terms of Service', href: '/terms' },
-    { name: 'Cookie Policy', href: '/cookies' },
-    { name: 'Security', href: '/security' },
-  ],
+  contact: {
+    email: 'kefu308@gmail.com',
+    phone: '+86-17801460534',
+    address: 'No. 2875 Beichen West Road, Shaoxing, Zhejiang, China'
+  }
 }
 
 const socialLinks = [
   { name: 'Facebook', icon: Facebook, href: '#' },
+  { name: 'Instagram', icon: Instagram, href: '#' },
   { name: 'Twitter', icon: Twitter, href: '#' },
   { name: 'LinkedIn', icon: Linkedin, href: '#' },
   { name: 'YouTube', icon: Youtube, href: '#' },
+  { name: 'WhatsApp', icon: MessageCircle, href: '#' },
 ]
 
 export function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer className="bg-orange-100 text-gray-700">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main footer content */}
         <div className="py-12 md:py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
-            {/* Company info */}
-            <div className="lg:col-span-2">
-              <Link href="/" className="flex items-center space-x-2 mb-4">
-                <span className="text-2xl font-bold text-white">B2B</span>
-                <span className="text-xl font-semibold text-gray-400">Solutions</span>
-              </Link>
-              <p className="text-sm mb-4">
-                Empowering businesses with innovative solutions for growth and success 
-                in the digital age.
-              </p>
-              <div className="space-y-2">
-                <div className="flex items-center space-x-2">
-                  <Mail className="h-4 w-4" />
-                  <a href="mailto:contact@b2bsolutions.com" className="text-sm hover:text-white transition-colors">
-                    contact@b2bsolutions.com
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+            {/* Quick Links */}
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-6">Quick Links</h3>
+              <ul className="space-y-3">
+                {footerLinks.quickLinks.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      href={link.href}
+                      className="text-gray-600 hover:text-orange-600 transition-colors duration-200 flex items-center"
+                    >
+                      <span className="w-2 h-2 bg-orange-400 rounded-full mr-3"></span>
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Product Categories */}
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-6">Product Categories</h3>
+              <ul className="space-y-3">
+                {footerLinks.productCategories.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      href={link.href}
+                      className="text-gray-600 hover:text-orange-600 transition-colors duration-200 flex items-center"
+                    >
+                      <span className="w-2 h-2 bg-orange-400 rounded-full mr-3"></span>
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Contact Us */}
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-6">Contact Us</h3>
+              <div className="space-y-4">
+                <div className="flex items-center space-x-3">
+                  <Mail className="h-5 w-5 text-orange-500" />
+                  <a 
+                    href={`mailto:${footerLinks.contact.email}`} 
+                    className="text-gray-600 hover:text-orange-600 transition-colors duration-200"
+                  >
+                    {footerLinks.contact.email}
                   </a>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <Phone className="h-4 w-4" />
-                  <a href="tel:+1234567890" className="text-sm hover:text-white transition-colors">
-                    +1 (234) 567-890
+                <div className="flex items-center space-x-3">
+                  <Phone className="h-5 w-5 text-orange-500" />
+                  <a 
+                    href={`tel:${footerLinks.contact.phone}`} 
+                    className="text-gray-600 hover:text-orange-600 transition-colors duration-200"
+                  >
+                    {footerLinks.contact.phone}
                   </a>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <MapPin className="h-4 w-4" />
-                  <span className="text-sm">
-                    123 Business Ave, Suite 100, City, State 12345
+                <div className="flex items-start space-x-3">
+                  <MapPin className="h-5 w-5 text-orange-500 mt-1" />
+                  <span className="text-gray-600">
+                    {footerLinks.contact.address}
                   </span>
                 </div>
               </div>
-            </div>
-
-            {/* Links sections */}
-            <div>
-              <h3 className="text-sm font-semibold text-white mb-4">Solutions</h3>
-              <ul className="space-y-2">
-                {footerLinks.solutions.map((link) => (
-                  <li key={link.name}>
-                    <Link
-                      href={link.href}
-                      className="text-sm hover:text-white transition-colors"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-sm font-semibold text-white mb-4">Company</h3>
-              <ul className="space-y-2">
-                {footerLinks.company.map((link) => (
-                  <li key={link.name}>
-                    <Link
-                      href={link.href}
-                      className="text-sm hover:text-white transition-colors"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-sm font-semibold text-white mb-4">Resources</h3>
-              <ul className="space-y-2">
-                {footerLinks.resources.map((link) => (
-                  <li key={link.name}>
-                    <Link
-                      href={link.href}
-                      className="text-sm hover:text-white transition-colors"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-sm font-semibold text-white mb-4">Legal</h3>
-              <ul className="space-y-2">
-                {footerLinks.legal.map((link) => (
-                  <li key={link.name}>
-                    <Link
-                      href={link.href}
-                      className="text-sm hover:text-white transition-colors"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
         </div>
 
         {/* Bottom section */}
-        <div className="border-t border-gray-800 py-8">
+        <div className="border-t border-orange-200 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="text-sm">
-              © {new Date().getFullYear()} B2B Solutions. All rights reserved.
+            <div className="text-sm text-gray-600">
+              <p>Copyright © 2025 Blueheart Technology of Zhejiang Ltd.</p>
+              <p className="mt-1">Powered by FK</p>
             </div>
-            <div className="flex space-x-6">
+            <div className="flex space-x-4">
               {socialLinks.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-gray-400 hover:text-white transition-colors"
+                  className="text-gray-500 hover:text-orange-500 transition-colors duration-200 p-2 rounded-full hover:bg-orange-200"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={item.name}
                 >
-                  <span className="sr-only">{item.name}</span>
                   <item.icon className="h-5 w-5" />
                 </a>
               ))}
