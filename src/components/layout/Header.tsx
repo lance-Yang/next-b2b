@@ -274,7 +274,7 @@ export function Header() {
             </div>
 
             {/* 主题切换 (可选) */}
-            <div className="hidden xl:flex items-center gap-2">
+            {/* <div className="hidden xl:flex items-center gap-2">
               {Object.entries(themes).map(([key, theme]) => (
                 <button
                   key={key}
@@ -300,7 +300,7 @@ export function Header() {
                   title={theme.name}
                 />
               ))}
-            </div>
+            </div> */}
           </div>
 
           <div className="flex ml-4 lg:hidden">
