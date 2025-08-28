@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "@/styles/globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { I18nProvider } from "@/lib/i18n";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -79,9 +80,11 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head></head>
       <body className={`${inter.className} bg-white overflow-x-hidden`}>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <I18nProvider>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </I18nProvider>
       </body>
     </html>
   );

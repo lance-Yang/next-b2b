@@ -3,94 +3,83 @@
 import React from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ArrowRight, CheckCircle2 } from 'lucide-react'
+import { ArrowRight, Mail, Phone } from 'lucide-react'
+import { useI18n } from '@/lib/i18n'
 
 export function CTASection() {
+  const { t } = useI18n()
+  
   return (
-    <section className="relative overflow-hidden bg-primary py-16 sm:py-24">
-      {/* Background pattern */}
-      <div className="absolute inset-0 bg-grid-white/10 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))]" />
-      
-      {/* Decorative circles */}
-      <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-white/10 blur-3xl" />
-      <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-white/10 blur-3xl" />
-
-      <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 sm:py-20 bg-gray-50">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mx-auto max-w-4xl text-center"
+          transition={{ duration: 0.6 }}
+          className="max-w-4xl mx-auto text-center"
         >
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
-            Ready to Transform Your Business?
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            {t.GetInTouch || 'Get In Touch'}
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-primary-foreground/90">
-            Join thousands of companies that trust our platform to power their growth. 
-            Start your journey today with a free trial.
+          <p className="text-lg text-gray-600 mb-12 max-w-2xl mx-auto">
+            {t.GetInTouchTip || "We're here to help and answer any question you might have."}
           </p>
-
-          {/* Benefits list */}
-          <div className="mt-8 flex flex-col sm:flex-row gap-4 sm:gap-8 justify-center items-center">
-            <div className="flex items-center gap-2 text-white">
-              <CheckCircle2 className="h-5 w-5 text-green-400" />
-              <span>No credit card required</span>
-            </div>
-            <div className="flex items-center gap-2 text-white">
-              <CheckCircle2 className="h-5 w-5 text-green-400" />
-              <span>14-day free trial</span>
-            </div>
-            <div className="flex items-center gap-2 text-white">
-              <CheckCircle2 className="h-5 w-5 text-green-400" />
-              <span>Cancel anytime</span>
-            </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            {/* 电话联系 */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="bg-white p-8 rounded-xl shadow-sm border border-gray-100"
+            >
+              <Phone className="w-12 h-12 text-orange-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Call Us</h3>
+              <p className="text-gray-600 mb-4">Mon-Fri from 8am to 5pm</p>
+              <a 
+                href="tel:+1234567890" 
+                className="text-orange-500 hover:text-orange-600 font-semibold transition-colors"
+              >
+                +1 (234) 567-890
+              </a>
+            </motion.div>
+            
+            {/* 邮件联系 */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="bg-white p-8 rounded-xl shadow-sm border border-gray-100"
+            >
+              <Mail className="w-12 h-12 text-orange-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Email Us</h3>
+              <p className="text-gray-600 mb-4">We&apos;ll respond within 24 hours</p>
+              <a 
+                href="mailto:hello@company.com" 
+                className="text-orange-500 hover:text-orange-600 font-semibold transition-colors"
+              >
+                hello@company.com
+              </a>
+            </motion.div>
           </div>
-
-          {/* CTA buttons */}
+          
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-10 flex items-center justify-center gap-x-6"
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-12"
           >
-            <Link
-              href="/get-started"
-              className="rounded-md bg-white px-6 py-3 text-base font-semibold text-primary shadow-sm hover:bg-gray-100 transition-colors inline-flex items-center gap-2"
-            >
-              Start Free Trial
-              <ArrowRight className="h-4 w-4" />
-            </Link>
             <Link
               href="/contact"
-              className="text-base font-semibold leading-6 text-white hover:text-primary-foreground/80 transition-colors"
+              className="inline-flex items-center justify-center bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-lg font-semibold transition-colors text-lg"
             >
-              Talk to Sales <span aria-hidden="true">→</span>
+              {t.SendUsAMessage || 'Send Us A Message'}
+              <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
-          </motion.div>
-
-          {/* Trust indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="mt-16"
-          >
-            <p className="text-sm text-primary-foreground/70">
-              Trusted by over 10,000+ businesses worldwide
-            </p>
-            <div className="mt-6 flex justify-center space-x-8 opacity-70">
-              {/* Placeholder for company logos */}
-              {[1, 2, 3, 4, 5].map((i) => (
-                <div
-                  key={i}
-                  className="h-8 w-24 bg-white/20 rounded"
-                  aria-label={`Company logo ${i}`}
-                />
-              ))}
-            </div>
           </motion.div>
         </motion.div>
       </div>

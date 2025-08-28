@@ -3,16 +3,9 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ShoppingCart, User, Search } from "lucide-react";
+import { Menu, X, Globe, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-const navigationItems = [
-  { name: "首页", href: "/" },
-  { name: "产品", href: "/products" },
-  { name: "服务", href: "/services" },
-  { name: "关于我们", href: "/about" },
-  { name: "联系我们", href: "/contact" },
-];
+import { useI18n, Language } from "@/lib/i18n";
 
 // 主题配置
 const themes = {
@@ -37,9 +30,15 @@ const themes = {
 type ThemeKey = keyof typeof themes;
 
 export function Header() {
-  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [currentTheme, setCurrentTheme] = React.useState<ThemeKey>("orange");
+  const [langDropdownOpen, setLangDropdownOpen] = React.useState(false);
+
+  // 国际化
+  const { currentLang, setLanguage, t, languages } = useI18n();
+
+  // 语言下拉菜单的ref
+  const langDropdownRef = React.useRef<HTMLDivElement>(null);
 
   // 切换主题的函数
   const switchTheme = (themeKey: ThemeKey) => {
@@ -61,6 +60,25 @@ export function Header() {
   React.useEffect(() => {
     switchTheme("orange");
   }, []);
+
+  // 点击外部关闭语言下拉菜单
+  React.useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        langDropdownRef.current &&
+        !langDropdownRef.current.contains(event.target as Node)
+      ) {
+        setLangDropdownOpen(false);
+      }
+    }
+
+    if (langDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }
+  }, [langDropdownOpen]);
 
   return (
     <div className="sticky top-0 z-50">
@@ -113,14 +131,14 @@ export function Header() {
               className="px-0 flex items-center justify-center nav-primary hover:text-navHover theme-transition text-base/6 font-semibold nav-item"
               href="/"
             >
-              Home
+              {t.Home}
             </Link>
             <div className="h-full relative group ml-14">
               <Link
                 className="px-0 text-gray-900 hover:text-mainColorNormal theme-transition cursor-pointer h-full flex items-center gap-x-0.5 text-base/6 font-semibold nav-item"
                 href="product.html"
               >
-                Product
+                {t.Products}
               </Link>
               <div className="absolute left-0 top-full mt-0.5 z-10 min-w-[200px] w-max bg-white shadow-[0_0_15px_rgba(0,0,0,0.1)] ring-1 ring-gray-900/5 rounded-none transition-all duration-200 opacity-0 invisible translate-y-2">
                 <div className="p-0">
@@ -193,40 +211,219 @@ export function Header() {
               className="px-0 flex items-center justify-center text-gray-900 nav-hover theme-transition text-base/6 font-semibold ml-14 nav-item"
               href="about.html"
             >
-              About Us
+              {t.AboutUs}
             </Link>
             <Link
               className="px-0 flex items-center justify-center text-gray-900 nav-hover theme-transition text-base/6 font-semibold ml-14 nav-item"
               href="contact.html"
             >
-              Contact Us
+              {t.ContactUs}
             </Link>
           </div>
-          <div className="flex ml-auto lg:hidden">
-            {/* <button
+
+          {/* 右侧操作区 */}
+          <div className="flex items-center ml-auto space-x-4">
+            {/* 语言切换 */}
+            <div className="relative" ref={langDropdownRef}>
+              <button
+                type="button"
+                onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+                className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:text-gray-900 theme-transition rounded-md hover:bg-gray-50"
+                aria-expanded={langDropdownOpen}
+                aria-haspopup="true"
+              >
+                <Globe className="w-4 h-4" />
+                <span className="text-lg">{languages[currentLang].flag}</span>
+                <span className="hidden sm:inline">
+                  {languages[currentLang].name}
+                </span>
+                <ChevronDown
+                  className={cn(
+                    "w-4 h-4 transition-transform duration-200",
+                    langDropdownOpen && "rotate-180"
+                  )}
+                />
+              </button>
+
+              {/* 语言下拉菜单 */}
+              {langDropdownOpen && (
+                <div className="absolute right-0 top-full mt-2 w-44 bg-white border border-gray-200 rounded-lg shadow-lg z-50 py-1">
+                  {Object.entries(languages).map(([code, lang]) => (
+                    <button
+                      key={code}
+                      onClick={() => {
+                        setLanguage(code as Language);
+                        setLangDropdownOpen(false);
+                      }}
+                      className={cn(
+                        "w-full flex items-center gap-3 px-4 py-2.5 text-sm text-left theme-transition first:rounded-t-lg last:rounded-b-lg",
+                        currentLang === code
+                          ? "bg-orange-50 text-orange-700 font-medium"
+                          : "text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+                      )}
+                    >
+                      <span className="text-lg">{lang.flag}</span>
+                      <span className="flex-1">{lang.name}</span>
+                      {currentLang === code && (
+                        <span className="text-orange-600">✓</span>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* 主题切换 (可选) */}
+            <div className="hidden xl:flex items-center gap-2">
+              {Object.entries(themes).map(([key, theme]) => (
+                <button
+                  key={key}
+                  onClick={() => switchTheme(key as ThemeKey)}
+                  className={cn(
+                    "w-6 h-6 rounded-full border-2 theme-transition",
+                    currentTheme === key
+                      ? "border-gray-900 scale-110"
+                      : "border-gray-300 hover:border-gray-500"
+                  )}
+                  style={{
+                    backgroundColor:
+                      key === "orange"
+                        ? "#F77220"
+                        : key === "blue"
+                        ? "#3366FF"
+                        : key === "green"
+                        ? "#10B981"
+                        : key === "purple"
+                        ? "#8B5CF6"
+                        : "#F77220",
+                  }}
+                  title={theme.name}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="flex ml-4 lg:hidden">
+            <button
               type="button"
-              className="-m-2.5 bg-transparent inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="-m-2.5 bg-transparent inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 hover:text-gray-900"
             >
               <span className="sr-only">Open main menu</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                aria-hidden="true"
-                data-slot="icon"
-                className="size-6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                ></path>
-              </svg>
-            </button> */}
+              {mobileMenuOpen ? (
+                <X className="h-6 w-6" aria-hidden="true" />
+              ) : (
+                <Menu className="h-6 w-6" aria-hidden="true" />
+              )}
+            </button>
           </div>
         </nav>
+
+        {/* 移动端菜单 */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden bg-white border-t border-gray-200">
+            <div className="px-6 py-4 space-y-4">
+              <div className="space-y-2">
+                <Link
+                  href="/"
+                  className="block px-3 py-2 text-base font-medium text-gray-900 nav-hover theme-transition rounded-md"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {t.Home}
+                </Link>
+                <Link
+                  href="/products"
+                  className="block px-3 py-2 text-base font-medium text-gray-900 nav-hover theme-transition rounded-md"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {t.Products}
+                </Link>
+                <Link
+                  href="/about"
+                  className="block px-3 py-2 text-base font-medium text-gray-900 nav-hover theme-transition rounded-md"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {t.AboutUs}
+                </Link>
+                <Link
+                  href="/contact"
+                  className="block px-3 py-2 text-base font-medium text-gray-900 nav-hover theme-transition rounded-md"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {t.ContactUs}
+                </Link>
+              </div>
+
+              {/* 移动端语言切换 */}
+              <div className="border-t border-gray-200 pt-4">
+                <div className="px-3 py-2 text-sm font-medium text-gray-500 uppercase tracking-wide">
+                  Language / 语言
+                </div>
+                <div className="space-y-1">
+                  {Object.entries(languages).map(([code, lang]) => (
+                    <button
+                      key={code}
+                      onClick={() => {
+                        setLanguage(code as Language);
+                        setMobileMenuOpen(false);
+                      }}
+                      className={cn(
+                        "w-full flex items-center gap-3 px-3 py-2 text-left rounded-md transition-colors",
+                        currentLang === code
+                          ? "bg-orange-50 text-orange-700 font-medium"
+                          : "text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+                      )}
+                    >
+                      <span className="text-lg">{lang.flag}</span>
+                      <span className="flex-1">{lang.name}</span>
+                      {currentLang === code && (
+                        <span className="text-orange-600">✓</span>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* 移动端主题切换 */}
+              <div className="border-t border-gray-200 pt-4">
+                <div className="px-3 py-2 text-sm font-medium text-gray-500 uppercase tracking-wide">
+                  Theme / 主题
+                </div>
+                <div className="flex items-center gap-3 px-3">
+                  {Object.entries(themes).map(([key, theme]) => (
+                    <button
+                      key={key}
+                      onClick={() => switchTheme(key as ThemeKey)}
+                      className={cn(
+                        "w-8 h-8 rounded-full border-2 theme-transition flex items-center justify-center",
+                        currentTheme === key
+                          ? "border-gray-900 scale-110 ring-2 ring-gray-300"
+                          : "border-gray-300 hover:border-gray-500"
+                      )}
+                      style={{
+                        backgroundColor:
+                          key === "orange"
+                            ? "#F77220"
+                            : key === "blue"
+                            ? "#3366FF"
+                            : key === "green"
+                            ? "#10B981"
+                            : key === "purple"
+                            ? "#8B5CF6"
+                            : "#F77220",
+                      }}
+                      title={theme.name}
+                    >
+                      {currentTheme === key && (
+                        <span className="text-white text-xs">✓</span>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </header>
     </div>
   );

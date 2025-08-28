@@ -1,111 +1,197 @@
 "use client"
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { ArrowRight, CheckCircle } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
+import { useI18n } from '@/lib/i18n'
 
-const features = [
-  'Enterprise-grade solutions',
-  'Scalable infrastructure',
-  '24/7 Expert support',
+// 轮播图数据
+const slides = [
+  {
+    id: 1,
+    title: 'Discover Smart\nSolutions to Boost Your\nProductivity.',
+    subtitle: 'Transform your business with innovative technology solutions',
+    primaryButton: 'Get A Free Quote',
+    secondaryButton: 'Discover More',
+    background: 'linear-gradient(135deg, #06B6D4 0%, #F59E0B 50%, #EC4899 100%)',
+  },
+  {
+    id: 2,
+    title: 'Innovative Products\nfor Modern\nBusinesses.',
+    subtitle: 'Streamline your operations with cutting-edge tools and services',
+    primaryButton: 'View Products',
+    secondaryButton: 'Learn More',
+    background: 'linear-gradient(135deg, #10B981 0%, #3B82F6 50%, #8B5CF6 100%)',
+  },
+  {
+    id: 3,
+    title: 'Excellence in\nService and\nSupport.',
+    subtitle: 'Experience world-class customer service and technical support',
+    primaryButton: 'Contact Us',
+    secondaryButton: 'Our Services',
+    background: 'linear-gradient(135deg, #F59E0B 0%, #EF4444 50%, #EC4899 100%)',
+  },
 ]
 
 export function HeroSection() {
+  const { t } = useI18n()
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [isAutoPlay, setIsAutoPlay] = useState(true)
+  
+  // 自动轮播
+  useEffect(() => {
+    if (!isAutoPlay) return
+    
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length)
+    }, 5000) // 5秒切换一次
+    
+    return () => clearInterval(timer)
+  }, [isAutoPlay])
+  
+  // 用户手动操作后重新启动自动轮播
+  const resetAutoPlay = () => {
+    setIsAutoPlay(false)
+    setTimeout(() => setIsAutoPlay(true), 10000) // 10秒后重新启动自动轮播
+  }
+  
+  // 上一张
+  const prevSlide = () => {
+    console.log('点击上一张，当前幻灯片:', currentSlide)
+    resetAutoPlay()
+    setCurrentSlide((prev) => {
+      const newSlide = (prev - 1 + slides.length) % slides.length
+      console.log('切换到幻灯片:', newSlide)
+      return newSlide
+    })
+  }
+  
+  // 下一张
+  const nextSlide = () => {
+    console.log('点击下一张，当前幻灯片:', currentSlide)
+    resetAutoPlay()
+    setCurrentSlide((prev) => {
+      const newSlide = (prev + 1) % slides.length
+      console.log('切换到幻灯片:', newSlide)
+      return newSlide
+    })
+  }
+  
+  // 跳转到指定幻灯片
+  const goToSlide = (index: number) => {
+    console.log('点击指示器，跳转到幻灯片:', index)
+    resetAutoPlay()
+    setCurrentSlide(index)
+  }
+  
+  const currentSlideData = slides[currentSlide]
+  
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-gray-50 to-white py-20 sm:py-32">
-      {/* Background decoration */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-y-0 right-1/2 -mr-96 w-[200%] origin-bottom-left skew-x-[-30deg] bg-white shadow-xl shadow-indigo-600/10 ring-1 ring-indigo-50 sm:-mr-80 lg:-mr-96" />
-      </div>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-x-8 lg:gap-y-20">
-          {/* Content */}
-          <div className="relative z-10 mx-auto max-w-2xl lg:col-span-7 lg:max-w-none lg:pt-6 xl:col-span-6">
+    <section className="relative h-[500px] lg:h-[600px] overflow-hidden">
+      {/* 背景图片 */}
+      <motion.div 
+        key={currentSlide}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          background: currentSlideData.background
+        }}
+      />
+      
+      {/* 覆盖层 */}
+      <div className="absolute inset-0 bg-black/20" />
+      
+      {/* 左右箭头导航 */}
+      <button 
+        onClick={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          prevSlide()
+        }}
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/20 hover:bg-white/30 transition-all duration-200 hover:scale-110 cursor-pointer border-none outline-none"
+        aria-label="Previous slide"
+        type="button"
+      >
+        <ChevronLeft className="w-6 h-6 text-white" />
+      </button>
+      <button 
+        onClick={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          nextSlide()
+        }}
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/20 hover:bg-white/30 transition-all duration-200 hover:scale-110 cursor-pointer border-none outline-none"
+        aria-label="Next slide"
+        type="button"
+      >
+        <ChevronRight className="w-6 h-6 text-white" />
+      </button>
+      
+      {/* 中心内容 */}
+      <div className="relative z-10 h-full flex items-center justify-center">
+        <div className="text-center text-white px-4 max-w-4xl mx-auto">
+          <AnimatePresence mode="wait">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}  
+              key={currentSlide}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 0.6 }}
             >
-              <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
-                Transform Your Business with{' '}
-                <span className="text-primary">Smart Solutions</span>
-              </h1>
-              <p className="mt-6 text-lg text-gray-600">
-                Empower your enterprise with cutting-edge B2B solutions designed to 
-                streamline operations, boost productivity, and drive sustainable growth 
-                in the digital age.
-              </p>
-
-              {/* Features list */}
-              <ul className="mt-8 space-y-3">
-                {features.map((feature, index) => (
-                  <motion.li
-                    key={feature}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="flex items-center gap-x-3"
-                  >
-                    <CheckCircle className="h-5 w-5 flex-shrink-0 text-green-500" />
-                    <span className="text-gray-700">{feature}</span>
-                  </motion.li>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
+                {currentSlideData.title.split('\n').map((line, index) => (
+                  <span key={index} className="block">
+                    {line}
+                  </span>
                 ))}
-              </ul>
-
-              {/* CTA buttons */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="mt-10 flex items-center gap-x-6"
-              >
-                <Link
-                  href="/get-started"
-                  className="rounded-md bg-primary px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary/90 transition-colors inline-flex items-center gap-2"
-                >
-                  Get Started
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link
-                  href="/demo"
-                  className="text-sm font-semibold leading-6 text-gray-900 hover:text-primary transition-colors"
-                >
-                  Schedule a demo <span aria-hidden="true">→</span>
-                </Link>
-              </motion.div>
-            </motion.div>
-          </div>
-
-          {/* Image/Illustration */}
-          <div className="relative mt-10 sm:mt-20 lg:col-span-5 lg:row-span-2 lg:mt-0 xl:col-span-6">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="relative"
-            >
-              {/* Placeholder for hero image */}
-              <div className="aspect-[3/2] w-full rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 lg:aspect-[4/3] lg:w-[130%]">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="mx-auto h-24 w-24 rounded-full bg-primary/10 flex items-center justify-center">
-                      <div className="h-16 w-16 rounded-full bg-primary/20 flex items-center justify-center">
-                        <div className="h-10 w-10 rounded-full bg-primary/30" />
-                      </div>
-                    </div>
-                    <p className="mt-4 text-sm text-gray-600">Business Dashboard Illustration</p>
-                  </div>
-                </div>
-              </div>
+              </h1>
               
-              {/* Decorative elements */}
-              <div className="absolute -bottom-4 -right-4 h-32 w-32 rounded-full bg-primary/10 blur-3xl" />
-              <div className="absolute -top-4 -left-4 h-32 w-32 rounded-full bg-primary/10 blur-3xl" />
+              <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+                {currentSlideData.subtitle}
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Link
+                  href="/products"
+                  className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-lg font-semibold transition-colors inline-flex items-center gap-2 text-lg cursor-pointer"
+                >
+                  {t.GetAFreeQuote || currentSlideData.primaryButton}
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+                <Link
+                  href="/about"
+                  className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg font-semibold transition-all text-lg cursor-pointer"
+                >
+                  {t.ViewMore || currentSlideData.secondaryButton}
+                </Link>
+              </div>
             </motion.div>
-          </div>
+          </AnimatePresence>
         </div>
+      </div>
+      
+      {/* 底部指示器 */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-3 z-20">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              goToSlide(index)
+            }}
+            className={`w-3 h-3 rounded-full transition-all duration-300 cursor-pointer border-none outline-none ${
+              index === currentSlide 
+                ? 'bg-white scale-125' 
+                : 'bg-white/50 hover:bg-white/75'
+            }`}
+            aria-label={`Go to slide ${index + 1}`}
+            type="button"
+          />
+        ))}
       </div>
     </section>
   )

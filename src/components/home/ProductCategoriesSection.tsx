@@ -3,133 +3,116 @@
 import React from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ArrowRight, Zap, Shield, Cpu, Users, BarChart3, Globe } from 'lucide-react'
+import { useI18n } from '@/lib/i18n'
 
 const categories = [
   {
-    icon: Zap,
-    title: 'Automation Tools',
-    description: 'Streamline your workflows with intelligent automation solutions.',
-    href: '/products/automation',
-    color: 'bg-yellow-500',
+    title: 'Sport Drink',
+    description: 'Refreshing beverages for active lifestyle',
+    image: '🥤',
+    bgColor: 'bg-yellow-400',
+    href: '/products/sport-drinks',
   },
   {
-    icon: Shield,
-    title: 'Security Solutions',
-    description: 'Protect your business with enterprise-grade security.',
-    href: '/products/security',
-    color: 'bg-red-500',
+    title: 'Sport Fitness',
+    description: 'Professional fitness equipment and gear',
+    image: '🏋️',
+    bgColor: 'bg-gray-400',
+    href: '/products/fitness',
   },
   {
-    icon: Cpu,
-    title: 'AI & Analytics',
-    description: 'Harness the power of AI for data-driven insights.',
-    href: '/products/analytics',
-    color: 'bg-blue-500',
+    title: 'Sport Outdoor',
+    description: 'Camping and outdoor adventure essentials',
+    image: '⛺',
+    bgColor: 'bg-orange-600',
+    href: '/products/outdoor',
   },
   {
-    icon: Users,
-    title: 'Team Collaboration',
-    description: 'Enhance teamwork with unified communication platforms.',
-    href: '/products/collaboration',
-    color: 'bg-green-500',
-  },
-  {
-    icon: BarChart3,
-    title: 'Business Intelligence',
-    description: 'Transform data into actionable business insights.',
-    href: '/products/business-intelligence',
-    color: 'bg-purple-500',
-  },
-  {
-    icon: Globe,
-    title: 'Cloud Infrastructure',
-    description: 'Scale your operations with robust cloud solutions.',
-    href: '/products/cloud',
-    color: 'bg-indigo-500',
+    title: 'Sport Wearables',
+    description: 'Smart devices for fitness tracking',
+    image: '⌚',
+    bgColor: 'bg-gray-800',
+    href: '/products/wearables',
   },
 ]
 
 export function ProductCategoriesSection() {
+  const { t } = useI18n()
+  
   return (
-    <section className="py-16 sm:py-24 bg-gray-50">
+    <section className="py-16 sm:py-20 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
+        <div className="text-center mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+            transition={{ duration: 0.6 }}
+            className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight"
           >
-            Explore Our Product Categories
+            PRODUCT CATEGORIES
           </motion.h2>
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto"
-          >
-            Discover comprehensive solutions designed to transform every aspect of your business operations
-          </motion.p>
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="mt-4 mx-auto w-20 h-1 bg-orange-500"
+          />
         </div>
 
-        <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {categories.map((category, index) => {
-            const Icon = category.icon
-            return (
-              <motion.div
-                key={category.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100"
-              >
-                <div className="flex items-center">
-                  <div className={`inline-flex items-center justify-center rounded-lg p-3 ${category.color} bg-opacity-10`}>
-                    <Icon className={`h-6 w-6 ${category.color.replace('bg-', 'text-')}`} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          {categories.map((category, index) => (
+            <motion.div
+              key={category.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="group cursor-pointer"
+            >
+              <Link href={category.href}>
+                <div className={`relative ${category.bgColor} rounded-2xl aspect-square overflow-hidden group-hover:scale-105 transition-transform duration-300`}>
+                  {/* 背景渐变效果 */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-black/10 to-black/30" />
+                  
+                  {/* 产品图片/图标区域 */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-8xl opacity-80 group-hover:scale-110 transition-transform duration-300">
+                      {category.image}
+                    </div>
                   </div>
+                  
+                  {/* 标题文字覆盖在底部 */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                    <h3 className="text-xl font-bold mb-2 group-hover:text-orange-200 transition-colors">
+                      {category.title}
+                    </h3>
+                    <p className="text-sm opacity-90 group-hover:opacity-100 transition-opacity">
+                      {category.description}
+                    </p>
+                  </div>
+                  
+                  {/* hover 效果光晕 */}
+                  <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
-                <div className="mt-6">
-                  <h3 className="text-lg font-semibold text-gray-900 group-hover:text-primary transition-colors">
-                    {category.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-gray-600">
-                    {category.description}
-                  </p>
-                </div>
-                <div className="mt-6">
-                  <Link
-                    href={category.href}
-                    className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors"
-                  >
-                    Learn more
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-                
-                {/* Hover effect */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-              </motion.div>
-            )
-          })}
+              </Link>
+            </motion.div>
+          ))}
         </div>
-
+        
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-12 text-center"
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-center mt-12"
         >
           <Link
             href="/products"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-primary/90 transition-colors"
+            className="inline-flex items-center justify-center bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-lg font-semibold transition-colors text-lg"
           >
-            View All Products
-            <ArrowRight className="ml-2 h-5 w-5" />
+            {t.ViewAllProducts || 'View All Products'}
           </Link>
         </motion.div>
       </div>
