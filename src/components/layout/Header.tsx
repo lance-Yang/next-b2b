@@ -136,7 +136,7 @@ export function Header() {
             <div className="h-full relative group ml-14">
               <Link
                 className="px-0 text-gray-900 hover:text-mainColorNormal theme-transition cursor-pointer h-full flex items-center gap-x-0.5 text-base/6 font-semibold nav-item"
-                href="product.html"
+                href="/products"
               >
                 {t.Products}
               </Link>

@@ -12,56 +12,56 @@ const popularProducts = [
     title: 'Outdoor Adventure Essentials',
     image: '/home/1750127210265.jpeg', // 使用现有图片
     bgColor: 'bg-gray-700',
-    href: '/products/outdoor-adventure',
+    href: '/products/outdoor-adventure-essentials',
   },
   {
     id: 2,
     title: 'Hydration Nation',
     image: '/home/1750126326881.webp', // 使用现有图片
     bgColor: 'bg-green-500',
-    href: '/products/hydration',
+    href: '/products/hydration-nation',
   },
   {
     id: 3,
     title: 'Active Lifestyle Gear',
     image: '/home/1750126330116.webp', // 使用现有图片
     bgColor: 'bg-black',
-    href: '/products/lifestyle',
+    href: '/products/active-lifestyle-gear',
   },
   {
     id: 4,
     title: 'Modern Pathway',
     image: '/home/1750126333491.webp', // 使用现有图片
     bgColor: 'bg-orange-400',
-    href: '/products/modern',
+    href: '/products/modern-pathway',
   },
   {
     id: 5,
     title: 'Style Meets Comfort',
     image: '/home/1750127210265.jpeg',
     bgColor: 'bg-gray-400',
-    href: '/products/style-comfort',
+    href: '/products/outdoor-adventure-essentials', // 复用已有产品
   },
   {
     id: 6,
-    title: 'Elite Walker Elite Walker',
+    title: 'Elite Walker',
     image: '/home/1750126326881.webp',
     bgColor: 'bg-pink-300',
-    href: '/products/elite-walker',
+    href: '/products/hydration-nation', // 复用已有产品
   },
   {
     id: 7,
     title: 'Pure Motion',
     image: '/home/1750126330116.webp',
     bgColor: 'bg-green-600',
-    href: '/products/pure-motion',
+    href: '/products/active-lifestyle-gear', // 复用已有产品
   },
   {
     id: 8,
     title: 'Street Spirit',
     image: '/home/1750126333491.webp',
     bgColor: 'bg-gray-200',
-    href: '/products/street-spirit',
+    href: '/products/modern-pathway', // 复用已有产品
   },
 ]
 

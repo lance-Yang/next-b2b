@@ -1,8 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Play, Monitor, Smartphone, Tablet } from 'lucide-react'
+import { Play, Monitor, Smartphone, Tablet, ExternalLink } from 'lucide-react'
 import { useState } from 'react'
+import Link from 'next/link'
 
 export default function ProductShowcase() {
   const [activeTab, setActiveTab] = useState('dashboard')
@@ -186,6 +187,96 @@ export default function ProductShowcase() {
               </div>
             </motion.div>
           </div>
+        </div>
+      </div>
+      
+      {/* Featured Products Section */}
+      <div className="mt-20">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <h3 className="text-3xl font-bold text-gray-900 mb-4">
+            Featured Products
+          </h3>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Explore our range of premium products designed for excellence
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[
+            {
+              id: 'outdoor-adventure-essentials',
+              name: 'Outdoor Adventure Essentials',
+              category: 'Outdoor Adventure',
+              price: '$99.99',
+              image: '/home/products/product-1.jpg',
+              description: 'Premium outdoor gear for your adventures'
+            },
+            {
+              id: 'modern-pathway', 
+              name: 'Modern Pathway',
+              category: 'Outdoor Adventure',
+              price: '$79.99',
+              image: '/home/products/product-2.jpg',
+              description: 'Innovative design meets functionality'
+            },
+            {
+              id: 'ultimate-sports-gear',
+              name: 'Ultimate Sports Gear',
+              category: 'Sports Equipment',
+              price: '$149.99', 
+              image: '/home/products/product-3.jpg',
+              description: 'Professional-grade sports equipment'
+            }
+          ].map((product, index) => (
+            <motion.div
+              key={product.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group"
+            >
+              <div className="relative aspect-square overflow-hidden">
+                <div className="w-full h-full bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center">
+                  <div className="text-center">
+                    <Monitor className="w-16 h-16 text-orange-600 mx-auto mb-4" />
+                    <p className="text-orange-700 font-medium">{product.name}</p>
+                  </div>
+                </div>
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300" />
+              </div>
+              
+              <div className="p-6">
+                <p className="text-sm text-orange-600 font-medium mb-2">
+                  {product.category}
+                </p>
+                <h4 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors">
+                  {product.name}
+                </h4>
+                <p className="text-gray-600 text-sm mb-4">
+                  {product.description}
+                </p>
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl font-bold text-orange-600">
+                    {product.price}
+                  </span>
+                  <Link
+                    href={`/products/${product.id}`}
+                    className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-300"
+                  >
+                    View Details
+                    <ExternalLink className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
