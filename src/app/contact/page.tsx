@@ -1,7 +1,4 @@
-import ContactHero from '@/components/contact/ContactHero'
-import ContactForm from '@/components/contact/ContactForm'
-import ContactInfo from '@/components/contact/ContactInfo'
-import ContactMap from '@/components/contact/ContactMap'
+import { ContactUsPage } from '@/components/contact/ContactUsPage'
 
 export const metadata = {
   title: 'Contact Us | Get in Touch with Our Team',
@@ -15,12 +12,5 @@ export const metadata = {
 }
 
 export default function ContactPage() {
-  return (
-    <main className="min-h-screen">
-      <ContactHero />
-      <ContactForm />
-      <ContactInfo />
-      <ContactMap />
-    </main>
-  )
+  return <ContactUsPage />
 }

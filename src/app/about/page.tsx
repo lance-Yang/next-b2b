@@ -1,8 +1,4 @@
-import AboutHero from '@/components/about/AboutHero'
-import AboutStory from '@/components/about/AboutStory'
-import AboutValues from '@/components/about/AboutValues'
-import AboutTeam from '@/components/about/AboutTeam'
-import AboutStats from '@/components/about/AboutStats'
+import { AboutUsPage } from '@/components/about/AboutUsPage'
 
 export const metadata = {
   title: 'About Us | Our Story & Mission',
@@ -11,13 +7,5 @@ export const metadata = {
 }
 
 export default function AboutPage() {
-  return (
-    <>
-      <AboutHero />
-      <AboutStory />
-      <AboutValues />
-      <AboutStats />
-      <AboutTeam />
-    </>
-  )
+  return <AboutUsPage />
 }

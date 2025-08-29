@@ -209,13 +209,13 @@ export function Header() {
             </div>
             <Link
               className="px-0 flex items-center justify-center text-gray-900 nav-hover theme-transition text-base/6 font-semibold ml-14 nav-item"
-              href="about.html"
+              href="/about"
             >
               {t.AboutUs}
             </Link>
             <Link
               className="px-0 flex items-center justify-center text-gray-900 nav-hover theme-transition text-base/6 font-semibold ml-14 nav-item"
-              href="contact.html"
+              href="/contact"
             >
               {t.ContactUs}
             </Link>
