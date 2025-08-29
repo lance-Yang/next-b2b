@@ -113,7 +113,7 @@ export function AboutUsPage() {
             className="flex flex-col p-0"
           >
             {/* 装饰线 */}
-            <div className="h-1 w-28 bg-gradient-to-r from-mainColorNormal to-mainColorNormalAlpha-50 mb-6"></div>
+            <div className="h-1 w-28 bg-gradient-to-r from-orange-500 to-orange-200 mb-6"></div>
             
             <h2 className="text-2xl lg:text-4xl font-bold text-gray-900 mb-6">
               Who We Are
@@ -210,7 +210,7 @@ export function AboutUsPage() {
             className="flex flex-col p-0 order-1 lg:order-2"
           >
             {/* 装饰线 */}
-            <div className="h-1 w-28 bg-mainColorNormal from-mainColorNormal to-mainColorNormalAlpha-50 mb-6"></div>
+            <div className="h-1 w-28 bg-gradient-to-r from-orange-500 to-orange-200 mb-6"></div>
             
             <h2 className="text-2xl lg:text-4xl font-bold text-gray-900 mb-6">
               Our Mission
