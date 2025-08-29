@@ -102,136 +102,137 @@ export function AboutUsPage() {
       </div>
 
       {/* Who We Are 区域 */}
-      <section className="py-16 bg-mainColorLight">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            {/* 文字内容 */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                Who We Are
-              </h2>
-              <div className="space-y-3 text-gray-700 leading-relaxed text-sm">
-                <p>
-                  Founded in 2018, Blueheart is a leading e-commerce platform dedicated to 
-                  delivering a seamless and enjoyable shopping experience to customers 
-                  worldwide. Our mission is to connect people with the products they love, 
-                  offering a curated selection of top-quality items across a variety of categories, 
-                  including electronics, fashion, home goods, and more.
-                </p>
-                <p>
-                  With a focus on innovation, reliability, and customer satisfaction, we have 
-                  rapidly grown our user base and built strong relationships with trusted 
-                  suppliers and brands. Our user-friendly website and mobile app are designed 
-                  to make shopping fast, easy, and secure for everyone.
-                </p>
-                <p>
-                  We utilize advanced technology to ensure safe transactions, prompt delivery, 
-                  and responsive customer service. We utilize advanced technology to ensure 
-                  safe transactions, prompt delivery, and responsive customer service.
-                </p>
-              </div>
-            </motion.div>
+      <section className="bg-mainColorLight py-8 lg:py-20">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 px-6 lg:px-8">
+          {/* 文字内容 */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-col p-0"
+          >
+            {/* 装饰线 */}
+            <div className="h-1 w-28 bg-gradient-to-r from-mainColorNormal to-mainColorNormalAlpha-50 mb-6"></div>
+            
+            <h2 className="text-2xl lg:text-4xl font-bold text-gray-900 mb-6">
+              Who We Are
+            </h2>
+            
+            <p className="flex-1 text-gray-700 mb-4 overflow-hidden relative">
+              Founded in 2018, Blueheart is a leading e-commerce platform
+              dedicated to delivering a seamless and enjoyable shopping
+              experience to customers worldwide. Our mission is to connect
+              people with the products they love, offering a curated
+              selection of top-quality items across a variety of
+              categories, including electronics, fashion, home goods, and
+              more. <br /><br />
+              With a focus on innovation, reliability, and customer
+              satisfaction, we have rapidly grown our user base and built
+              strong relationships with trusted suppliers and brands. Our
+              user-friendly website and mobile app are designed to make
+              shopping fast, easy, and secure for everyone. We utilize
+              advanced technology to ensure safe transactions, prompt
+              delivery, and responsive customer service. We utilize
+              advanced technology to ensure safe transactions, prompt
+              delivery, and responsive customer service.
+            </p>
+          </motion.div>
 
-            {/* 图片 */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="relative"
-            >
-              <div className="aspect-[4/3] rounded-xl overflow-hidden shadow-lg max-w-lg mx-auto lg:mx-0">
-                <Image
-                  src="/home/1750126326881.webp"
-                  alt="Team meeting and collaboration"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 500px"
-                />
-              </div>
-            </motion.div>
-          </div>
+          {/* 图片 */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="relative h-60 md:h-96 bg-gray-100 rounded-lg overflow-hidden">
+              <Image
+                src="/home/1750126326881.webp"
+                alt="About Us"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Our Mission 区域 */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            {/* 图片和统计 */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="relative"
-            >
-              <div className="aspect-[4/3] rounded-xl overflow-hidden shadow-lg mb-4 max-w-md mx-auto lg:mx-0">
-                <Image
-                  src="/home/1750126330116.webp"
-                  alt="Our mission and global reach"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 400px"
-                />
-              </div>
-              
-              {/* 统计数据 */}
-              <div className="grid grid-cols-3 gap-3 max-w-md mx-auto lg:mx-0">
-                {stats.map((stat, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className="bg-mainColorLight rounded-lg p-3 text-center"
-                  >
-                    <div className="text-xl md:text-2xl font-bold text-orange-600 mb-1">
-                      {stat.number}
-                    </div>
-                    <div className="text-sm text-gray-600">{stat.label}</div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
+      <section className="bg-white py-10 lg:py-20">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 px-6 lg:px-8">
+          {/* 图片和统计 - 左侧在大屏幕上，移动端显示在下方 */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-col order-2 lg:order-1"
+          >
+            <div className="relative h-60 lg:h-96 bg-gray-100 rounded-lg overflow-hidden mb-8">
+              <Image
+                src="/home/1750126330116.webp"
+                alt="Our Global Mission"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                priority
+              />
+            </div>
+            
+            {/* 统计数据 */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-auto">
+              {stats.map((stat, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="bg-mainColorLight p-6 rounded-lg"
+                >
+                  <dd className="text-4xl font-semibold tracking-tight text-mainColorNormal mb-2">
+                    {stat.number}
+                  </dd>
+                  <dt className="text-sm text-gray-600">{stat.label}</dt>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
 
-            {/* 文字内容 */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                Our Mission
-              </h2>
-              <div className="space-y-3 text-gray-700 leading-relaxed text-sm">
-                <p>
-                  Our mission is to revolutionize the e-commerce landscape by creating 
-                  meaningful connections between customers and the products they desire. 
-                  We strive to make online shopping accessible, enjoyable, and secure for 
-                  everyone, regardless of their location or background.
-                </p>
-                <p>
-                  We are committed to fostering innovation in retail technology while 
-                  maintaining the highest standards of quality and customer service. 
-                  Our platform serves as a bridge between global suppliers and local 
-                  consumers, creating value for all stakeholders in the process.
-                </p>
-                <p>
-                  Through continuous improvement and customer-centric approach, we aim to 
-                  build lasting relationships with our users and partners, contributing 
-                  to the growth of digital commerce worldwide.
-                </p>
-              </div>
-            </motion.div>
-          </div>
+          {/* 文字内容 - 右侧在大屏幕上，移动端显示在上方 */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-col p-0 order-1 lg:order-2"
+          >
+            {/* 装饰线 */}
+            <div className="h-1 w-28 bg-mainColorNormal from-mainColorNormal to-mainColorNormalAlpha-50 mb-6"></div>
+            
+            <h2 className="text-2xl lg:text-4xl font-bold text-gray-900 mb-6">
+              Our Mission
+            </h2>
+            
+            <p className="text-gray-700">
+              Our mission is to revolutionize the way people shop by
+              creating an accessible, trustworthy, and enjoyable online
+              marketplace. We are dedicated to empowering customers with a
+              wide variety of high-quality products at competitive prices,
+              while ensuring unparalleled convenience and service every
+              step of the way. <br /><br />
+              We believe shopping should be effortless and rewarding,
+              which is why we continually invest in technology, logistics,
+              and customer support to provide a seamless experience. Our
+              platform is designed with the customer in mind, making it
+              easy to explore, compare, and purchase products from the
+              comfort of home or on-the-go. purchase products from the
+              comfort of home or on-the-go. Our platform is designed with
+              the customer.
+            </p>
+          </motion.div>
         </div>
       </section>
 
@@ -245,11 +246,11 @@ export function AboutUsPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 Our Advantages
               </h2>
               <p className="text-gray-600 max-w-2xl mx-auto text-sm">
-                Discover how clients choose us as their trusted business partner
+                Discover how clients choose us as their trusted business partner for innovation and growth
               </p>
             </motion.div>
           </div>
@@ -291,7 +292,7 @@ export function AboutUsPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 Our Factory
               </h2>
             </motion.div>
@@ -343,7 +344,7 @@ export function AboutUsPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 Contact Us
               </h2>
               <p className="text-lg text-gray-300 mb-6 max-w-xl mx-auto">

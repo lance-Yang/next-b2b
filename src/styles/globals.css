@@ -7,19 +7,19 @@
   .text-shadow-sm {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   }
-  
+
   .text-shadow-md {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   }
-  
+
   .text-shadow-lg {
     text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   }
-  
+
   .text-shadow-xl {
     text-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
   }
-  
+
   /* 轮播图性能优化 */
   .carousel-container {
     transform: translateZ(0);
@@ -30,7 +30,7 @@
     -webkit-perspective: 1000px;
     perspective: 1000px;
   }
-  
+
   .smooth-transition {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -38,145 +38,157 @@
 
 /* 基本CSS变量定义 */
 :root {
-    /* 默认主题色 - 通用变量 */
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+  /* 默认主题色 - 通用变量 */
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
 
-    /* 当前激活的主题色 - 直接设置为橙色 */
-    --main-color-light: 22 93% 90%;
-    --main-color-normal: 22 93% 55%;
-    --main-color-deep: 22 93% 50%;
+  /* 当前激活的主题色 - 直接设置为橙色 */
+  --main-color-light: 22 93% 90%;
+  --main-color-normal: 22 93% 55%;
+  --main-color-deep: 22 93% 50%;
 
-    /* 也直接设置对应的模板颜色 */
-    --main-color-light-001: 22 93% 90%;
-    --main-color-normal-001: 22 93% 55%;
-    --main-color-deep-001: 22 93% 50%;
-    
-    /* ========== 新的动态主题系统 ==========
+  /* 也直接设置对应的模板颜色 */
+  --main-color-light-001: 22 93% 90%;
+  --main-color-normal-001: 22 93% 55%;
+  --main-color-deep-001: 22 93% 50%;
+
+  /* ========== 新的动态主题系统 ==========
        默认主题：橙色系 */
-    --nav-primary: 22 93% 55%;    /* 导航栏主色 */
-    --nav-hover: 22 93% 50%;      /* 导航栏悬停色 */
-    --nav-active: 22 93% 40%;     /* 导航栏激活色 */
-    
-    /* 品牌主题色板 */
-    --brand-primary: 22 93% 55%;   /* 主色 */
-    --brand-secondary: 215 100% 50%; /* 辅助色 (蓝色) */
-    --brand-accent: 22 93% 60%;    /* 强调色 */
-    --brand-light: 22 93% 90%;     /* 浅色 */
-    --brand-dark: 22 93% 40%;      /* 深色 */
-    
-    /* 功能性颜色 */
-    --color-success: 142 76% 36%;  /* 成功色 (绿色) */
-    --color-warning: 38 92% 50%;   /* 警告色 (黄色) */
-    --color-error: 0 84% 60%;      /* 错误色 (红色) */
-    --color-info: 217 91% 60%;     /* 信息色 (蓝色) */
+  --nav-primary: 22 93% 55%;
+  /* 导航栏主色 */
+  --nav-hover: 22 93% 50%;
+  /* 导航栏悬停色 */
+  --nav-active: 22 93% 40%;
+  /* 导航栏激活色 */
 
-    /* 模板主题颜色系统 */
-    /* 模板02的颜色 */
-    --main-color-light-002: 36 100% 95%;
-    --main-color-normal-002: 36 100% 46%;
-    --main-color-deep-002: 36 100% 40%;
+  /* 品牌主题色板 */
+  --brand-primary: 22 93% 55%;
+  /* 主色 */
+  --brand-secondary: 215 100% 50%;
+  /* 辅助色 (蓝色) */
+  --brand-accent: 22 93% 60%;
+  /* 强调色 */
+  --brand-light: 22 93% 90%;
+  /* 浅色 */
+  --brand-dark: 22 93% 40%;
+  /* 深色 */
 
-    /* 模板03的颜色 */
-    --main-color-light-003: 37 56% 95%;
-    --main-color-normal-003: 37 56% 57%;
-    --main-color-deep-003: 37 56% 50%;
+  /* 功能性颜色 */
+  --color-success: 142 76% 36%;
+  /* 成功色 (绿色) */
+  --color-warning: 38 92% 50%;
+  /* 警告色 (黄色) */
+  --color-error: 0 84% 60%;
+  /* 错误色 (红色) */
+  --color-info: 217 91% 60%;
+  /* 信息色 (蓝色) */
 
-    /* 模板04的颜色 */
-    --main-color-light-004: 215 100% 95%;
-    --main-color-normal-004: 215 100% 30%;
-    --main-color-deep-004: 215 100% 26%;
+  /* 模板主题颜色系统 */
+  /* 模板02的颜色 */
+  --main-color-light-002: 36 100% 95%;
+  --main-color-normal-002: 36 100% 46%;
+  --main-color-deep-002: 36 100% 40%;
 
-    /* 模板05的颜色 */
-    --main-color-light-005: 216 100% 95%;
-    --main-color-normal-005: 216 100% 50%;
-    --main-color-deep-005: 216 100% 40%;
+  /* 模板03的颜色 */
+  --main-color-light-003: 37 56% 95%;
+  --main-color-normal-003: 37 56% 57%;
+  --main-color-deep-003: 37 56% 50%;
 
-    /* 模板06的颜色 */
-    --main-color-light-006: 331 95% 95%;
-    --main-color-normal-006: 331 95% 68%;
-    --main-color-deep-006: 331 78% 63%;
+  /* 模板04的颜色 */
+  --main-color-light-004: 215 100% 95%;
+  --main-color-normal-004: 215 100% 30%;
+  --main-color-deep-004: 215 100% 26%;
 
-    /* 模板07的颜色 */
-    --main-color-light-007: 0 91% 95%;
-    --main-color-normal-007: 0 91% 55%;
-    --main-color-deep-007: 0 91% 63%;
+  /* 模板05的颜色 */
+  --main-color-light-005: 216 100% 95%;
+  --main-color-normal-005: 216 100% 50%;
+  --main-color-deep-005: 216 100% 40%;
 
-    /* 模板08的颜色 */
-    --main-color-light-008: 136 60% 90%;
-    --main-color-normal-008: 136 60% 43%;
-    --main-color-deep-008: 136 60% 35%;
+  /* 模板06的颜色 */
+  --main-color-light-006: 331 95% 95%;
+  --main-color-normal-006: 331 95% 68%;
+  --main-color-deep-006: 331 78% 63%;
 
-    /* 模板09的颜色 */
-    --main-color-light-009: 123 42% 90%;
-    --main-color-normal-009: 123 42% 56%;
-    --main-color-deep-009: 123 42% 50%;
+  /* 模板07的颜色 */
+  --main-color-light-007: 0 91% 95%;
+  --main-color-normal-007: 0 91% 55%;
+  --main-color-deep-007: 0 91% 63%;
 
-    /* 模板10的颜色 */
-    --main-color-light-010: 22 93% 90%;
-    --main-color-normal-010: 22 93% 55%;
-    --main-color-deep-010: 22 93% 50%;
+  /* 模板08的颜色 */
+  --main-color-light-008: 136 60% 90%;
+  --main-color-normal-008: 136 60% 43%;
+  --main-color-deep-008: 136 60% 35%;
+
+  /* 模板09的颜色 */
+  --main-color-light-009: 123 42% 90%;
+  --main-color-normal-009: 123 42% 56%;
+  --main-color-deep-009: 123 42% 50%;
+
+  /* 模板10的颜色 */
+  --main-color-light-010: 22 93% 90%;
+  --main-color-normal-010: 22 93% 55%;
+  --main-color-deep-010: 22 93% 50%;
 }
 
 .btn {
-    /* @apply bg-blue-500 hover: bg-blue-700 text-white font-bold py-2 px-4 rounded dark:bg-yellow-500 dark:hover:bg-green-500 */
+  /* @apply bg-blue-500 hover: bg-blue-700 text-white font-bold py-2 px-4 rounded dark:bg-yellow-500 dark:hover:bg-green-500 */
 }
 
 @layer base {
-    :root {
-        --background: 0 0% 100%;
-        --foreground: 240 10% 3.9%;
-        --card: 0 0% 100%;
-        --card-foreground: 240 10% 3.9%;
-        --popover: 0 0% 100%;
-        --popover-foreground: 240 10% 3.9%;
-        --primary: 142.1 76.2% 36.3%;
-        --primary-foreground: 355.7 100% 97.3%;
-        --secondary: 240 4.8% 95.9%;
-        --secondary-foreground: 240 5.9% 10%;
-        --muted: 240 4.8% 95.9%;
-        --muted-foreground: 240 3.8% 46.1%;
-        --accent: 240 4.8% 95.9%;
-        --accent-foreground: 240 5.9% 10%;
-        --destructive: 0 84.2% 60.2%;
-        --destructive-foreground: 0 0% 98%;
-        --border: 240 5.9% 90%;
-        --input: 240 5.9% 90%;
-        --ring: 142.1 76.2% 36.3%;
-        --radius: 0.5rem;
-        --chart-1: 12 76% 61%;
-        --chart-2: 173 58% 39%;
-        --chart-3: 197 37% 24%;
-        --chart-4: 43 74% 66%;
-        --chart-5: 27 87% 67%;
-    }
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 142.1 76.2% 36.3%;
+    --primary-foreground: 355.7 100% 97.3%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 142.1 76.2% 36.3%;
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
 
-    .dark {
-        --background: 20 14.3% 4.1%;
-        --foreground: 0 0% 95%;
-        --card: 24 9.8% 10%;
-        --card-foreground: 0 0% 95%;
-        --popover: 0 0% 9%;
-        --popover-foreground: 0 0% 95%;
-        --primary: 142.1 70.6% 45.3%;
-        --primary-foreground: 144.9 80.4% 10%;
-        --secondary: 240 3.7% 15.9%;
-        --secondary-foreground: 0 0% 98%;
-        --muted: 0 0% 15%;
-        --muted-foreground: 240 5% 64.9%;
-        --accent: 12 6.5% 15.1%;
-        --accent-foreground: 0 0% 98%;
-        --destructive: 0 62.8% 30.6%;
-        --destructive-foreground: 0 85.7% 97.3%;
-        --border: 240 3.7% 15.9%;
-        --input: 240 3.7% 15.9%;
-        --ring: 142.4 71.8% 29.2%;
-        --chart-1: 220 70% 50%;
-        --chart-2: 160 60% 45%;
-        --chart-3: 30 80% 55%;
-        --chart-4: 280 65% 60%;
-        --chart-5: 340 75% 55%;
-    }
+  .dark {
+    --background: 20 14.3% 4.1%;
+    --foreground: 0 0% 95%;
+    --card: 24 9.8% 10%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 142.1 70.6% 45.3%;
+    --primary-foreground: 144.9 80.4% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 85.7% 97.3%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 142.4 71.8% 29.2%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
 }
 
 /* ========== 自定义主题CSS - 使用CSS类而非CSSS变量 ========== */
@@ -186,7 +198,7 @@
   --nav-primary-rgb: 247, 114, 32;
   --nav-hover-rgb: 229, 90, 0;
   --nav-active-rgb: 200, 75, 0;
-  
+
   --brand-primary-rgb: 247, 114, 32;
   --brand-secondary-rgb: 51, 153, 255;
   --brand-light-rgb: 255, 239, 230;
@@ -230,7 +242,7 @@
   --nav-primary-rgb: 51, 102, 255;
   --nav-hover-rgb: 41, 82, 204;
   --nav-active-rgb: 31, 62, 153;
-  
+
   --brand-primary-rgb: 51, 102, 255;
   --brand-secondary-rgb: 247, 114, 32;
   --brand-light-rgb: 230, 237, 255;
@@ -274,7 +286,7 @@
   --nav-primary-rgb: 16, 185, 129;
   --nav-hover-rgb: 5, 150, 105;
   --nav-active-rgb: 4, 120, 87;
-  
+
   --brand-primary-rgb: 16, 185, 129;
   --brand-secondary-rgb: 139, 92, 246;
   --brand-light-rgb: 230, 253, 240;
@@ -318,7 +330,7 @@
   --nav-primary-rgb: 139, 92, 246;
   --nav-hover-rgb: 124, 58, 237;
   --nav-active-rgb: 109, 40, 217;
-  
+
   --brand-primary-rgb: 139, 92, 246;
   --brand-secondary-rgb: 16, 185, 129;
   --brand-light-rgb: 243, 237, 255;
