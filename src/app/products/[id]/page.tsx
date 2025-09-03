@@ -157,6 +157,358 @@ const productData = {
         price: '$99.99'
       }
     ]
+  },
+  'ultimate-sports-gear': {
+    id: 'ultimate-sports-gear',
+    name: 'Ultimate Sports Gear',
+    price: '$149.99',
+    category: 'Sport Gear',
+    images: [
+      '/products/sports-gear.jpg',
+      '/products/outdoor-shoes-1.jpg',
+      '/products/outdoor-shoes-2.jpg',
+    ],
+    description: `Experience the pinnacle of athletic performance with our Ultimate Sports Gear. Designed for professionals and enthusiasts alike, this gear combines cutting-edge technology with superior comfort to enhance your sporting experience.`,
+    specifications: {
+      'Material': 'Advanced performance fabrics',
+      'Weight': 'Ultra-lightweight construction',
+      'Durability': 'Professional-grade materials',
+      'Design': 'Ergonomic athletic fit',
+      'Breathability': 'Advanced moisture-wicking',
+      'Maintenance': 'Machine washable'
+    },
+    features: [
+      'Professional-grade performance',
+      'Advanced moisture-wicking',
+      'Ergonomic design',
+      'Lightweight construction',
+      'Durable materials',
+      'Enhanced breathability'
+    ],
+    relatedProducts: [
+      {
+        id: 'outdoor-adventure-essentials',
+        name: 'Outdoor Adventure Essentials',
+        category: 'Outdoor Adventure',
+        image: '/products/outdoor-shoes-1.jpg',
+        price: '$99.99'
+      },
+      {
+        id: 'elite-walker',
+        name: 'Elite Walker',
+        category: 'Sport Gear',
+        image: '/products/outdoor-shoes-3.jpg',
+        price: '$129.99'
+      }
+    ]
+  },
+  'cool-outdoor-attire': {
+    id: 'cool-outdoor-attire',
+    name: 'Cool Outdoor Attire',
+    price: '$89.99',
+    category: 'Outdoor Adventure',
+    images: [
+      '/products/outdoor-shoes-1.jpg',
+      '/products/outdoor-shoes-2.jpg',
+      '/products/outdoor-shoes-3.jpg',
+    ],
+    description: `Stay comfortable and stylish during your outdoor adventures with our Cool Outdoor Attire. Designed for various weather conditions, this attire offers both functionality and fashion.`,
+    specifications: {
+      'Material': 'Weather-resistant fabric blend',
+      'Weight': 'Lightweight for all-day wear',
+      'Protection': 'UV protection rating 50+',
+      'Comfort': 'Breathable and quick-drying',
+      'Fit': 'Relaxed outdoor fit',
+      'Care': 'Machine washable'
+    },
+    features: [
+      'Weather-resistant design',
+      'UV protection',
+      'Breathable fabric',
+      'Quick-drying technology',
+      'Multiple pockets',
+      'Stylish outdoor design'
+    ],
+    relatedProducts: [
+      {
+        id: 'outdoor-adventure-essentials',
+        name: 'Outdoor Adventure Essentials',
+        category: 'Outdoor Adventure',
+        image: '/products/outdoor-shoes-1.jpg',
+        price: '$99.99'
+      },
+      {
+        id: 'dynamic-step',
+        name: 'Dynamic Step',
+        category: 'Outdoor Adventure',
+        image: '/products/outdoor-shoes-2.jpg',
+        price: '$79.99'
+      }
+    ]
+  },
+  'trendy-fashion-hub': {
+    id: 'trendy-fashion-hub',
+    name: 'Trendy Fashion Hub',
+    price: '$69.99',
+    category: 'Trendy Apparel',
+    images: [
+      '/products/modern-pathway.jpg',
+      '/products/outdoor-shoes-1.jpg',
+      '/products/outdoor-shoes-2.jpg',
+    ],
+    description: `Make a fashion statement with our Trendy Fashion Hub collection. Featuring the latest styles and trends, this apparel is perfect for those who want to stand out from the crowd.`,
+    specifications: {
+      'Material': 'Premium fashion fabrics',
+      'Fit': 'Contemporary slim fit',
+      'Style': 'Latest fashion trends',
+      'Comfort': 'All-day comfort',
+      'Care': 'Dry clean recommended',
+      'Origin': 'Ethically sourced materials'
+    },
+    features: [
+      'Latest fashion trends',
+      'Premium quality materials',
+      'Contemporary design',
+      'Comfortable fit',
+      'Versatile styling',
+      'Ethically sourced'
+    ],
+    relatedProducts: [
+      {
+        id: 'modern-pathway',
+        name: 'Modern Pathway',
+        category: 'Urban Lifestyle',
+        image: '/products/modern-pathway.jpg',
+        price: '$79.99'
+      },
+      {
+        id: 'street-spirit',
+        name: 'Street Spirit',
+        category: 'Trendy Apparel',
+        image: '/products/outdoor-shoes-3.jpg',
+        price: '$59.99'
+      }
+    ]
+  },
+  'style-meets-comfort': {
+    id: 'style-meets-comfort',
+    name: 'Style Meets Comfort',
+    price: '$79.99',
+    category: 'Fitness Essentials',
+    images: [
+      '/products/outdoor-shoes-2.jpg',
+      '/products/outdoor-shoes-1.jpg',
+      '/products/outdoor-shoes-3.jpg',
+    ],
+    description: `Discover the perfect balance of style and comfort with our collection. Designed for modern lifestyles, these pieces offer versatility without compromising on comfort or aesthetics.`,
+    specifications: {
+      'Material': 'Comfort-stretch fabric blend',
+      'Fit': 'Comfortable regular fit',
+      'Style': 'Versatile modern design',
+      'Care': 'Easy care machine washable',
+      'Durability': 'Reinforced stitching',
+      'Breathability': 'Advanced air circulation'
+    },
+    features: [
+      'Perfect style-comfort balance',
+      'Versatile design',
+      'Easy care maintenance',
+      'Durable construction',
+      'Breathable fabric',
+      'Modern aesthetic'
+    ],
+    relatedProducts: [
+      {
+        id: 'active-lifestyle-gear',
+        name: 'Active Lifestyle Gear',
+        category: 'Fitness & Sports',
+        image: '/products/outdoor-shoes-3.jpg',
+        price: '$149.99'
+      },
+      {
+        id: 'elite-walker',
+        name: 'Elite Walker',
+        category: 'Sport Gear',
+        image: '/products/outdoor-shoes-3.jpg',
+        price: '$129.99'
+      }
+    ]
+  },
+  'elite-walker': {
+    id: 'elite-walker',
+    name: 'Elite Walker',
+    price: '$129.99',
+    category: 'Sport Gear',
+    images: [
+      '/products/outdoor-shoes-3.jpg',
+      '/products/outdoor-shoes-1.jpg',
+      '/products/outdoor-shoes-2.jpg',
+    ],
+    description: `Step into excellence with our Elite Walker collection. Designed for those who demand the best in comfort and performance, these shoes are perfect for both athletic activities and casual wear.`,
+    specifications: {
+      'Material': 'Premium synthetic and mesh',
+      'Sole': 'Advanced cushioning technology',
+      'Weight': 'Ultra-lightweight (260g per shoe)',
+      'Sizes': 'Available in sizes 6-13 (US)',
+      'Colors': 'Multiple color options',
+      'Care': 'Easy clean surface'
+    },
+    features: [
+      'Advanced cushioning',
+      'Lightweight design',
+      'Breathable mesh upper',
+      'Durable construction',
+      'Versatile styling',
+      'Superior comfort'
+    ],
+    relatedProducts: [
+      {
+        id: 'ultimate-sports-gear',
+        name: 'Ultimate Sports Gear',
+        category: 'Sport Gear',
+        image: '/products/sports-gear.jpg',
+        price: '$149.99'
+      },
+      {
+        id: 'style-meets-comfort',
+        name: 'Style Meets Comfort',
+        category: 'Fitness Essentials',
+        image: '/products/outdoor-shoes-2.jpg',
+        price: '$79.99'
+      }
+    ]
+  },
+  'dynamic-step': {
+    id: 'dynamic-step',
+    name: 'Dynamic Step',
+    price: '$79.99',
+    category: 'Outdoor Adventure',
+    images: [
+      '/products/outdoor-shoes-1.jpg',
+      '/products/outdoor-shoes-2.jpg',
+      '/products/outdoor-shoes-3.jpg',
+    ],
+    description: `Conquer any terrain with our Dynamic Step collection. Engineered for outdoor enthusiasts, these shoes provide the perfect combination of durability, comfort, and performance.`,
+    specifications: {
+      'Material': 'Rugged outdoor materials',
+      'Sole': 'All-terrain grip technology',
+      'Weight': 'Lightweight hiking design (300g per shoe)',
+      'Sizes': 'Available in sizes 5-12 (US)',
+      'Colors': 'Earth tone options',
+      'Care': 'Water-resistant, easy clean'
+    },
+    features: [
+      'All-terrain performance',
+      'Water-resistant design',
+      'Superior grip technology',
+      'Lightweight construction',
+      'Durable materials',
+      'Outdoor styling'
+    ],
+    relatedProducts: [
+      {
+        id: 'outdoor-adventure-essentials',
+        name: 'Outdoor Adventure Essentials',
+        category: 'Outdoor Adventure',
+        image: '/products/outdoor-shoes-1.jpg',
+        price: '$99.99'
+      },
+      {
+        id: 'cool-outdoor-attire',
+        name: 'Cool Outdoor Attire',
+        category: 'Outdoor Adventure',
+        image: '/products/outdoor-shoes-2.jpg',
+        price: '$89.99'
+      }
+    ]
+  },
+  'pure-motion': {
+    id: 'pure-motion',
+    name: 'Pure Motion',
+    price: '$39.99',
+    category: 'Nature Gear',
+    images: [
+      '/products/outdoor-shoes-2.jpg',
+      '/products/outdoor-shoes-1.jpg',
+      '/products/outdoor-shoes-3.jpg',
+    ],
+    description: `Experience freedom of movement with our Pure Motion collection. Designed for nature lovers and outdoor enthusiasts, this gear provides unmatched comfort and flexibility.`,
+    specifications: {
+      'Material': 'Flexible eco-friendly materials',
+      'Weight': 'Ultra-lightweight design',
+      'Flexibility': 'Maximum range of motion',
+      'Sustainability': 'Recycled materials',
+      'Care': 'Easy maintenance',
+      'Design': 'Nature-inspired aesthetics'
+    },
+    features: [
+      'Maximum flexibility',
+      'Eco-friendly materials',
+      'Lightweight construction',
+      'Nature-inspired design',
+      'Easy maintenance',
+      'Sustainable production'
+    ],
+    relatedProducts: [
+      {
+        id: 'hydration-nation',
+        name: 'Hydration Nation',
+        category: 'Health & Wellness',
+        image: '/products/outdoor-shoes-2.jpg',
+        price: '$29.99'
+      },
+      {
+        id: 'dynamic-step',
+        name: 'Dynamic Step',
+        category: 'Outdoor Adventure',
+        image: '/products/outdoor-shoes-1.jpg',
+        price: '$79.99'
+      }
+    ]
+  },
+  'street-spirit': {
+    id: 'street-spirit',
+    name: 'Street Spirit',
+    price: '$59.99',
+    category: 'Trendy Apparel',
+    images: [
+      '/products/outdoor-shoes-3.jpg',
+      '/products/modern-pathway.jpg',
+      '/products/outdoor-shoes-1.jpg',
+    ],
+    description: `Express your individuality with our Street Spirit collection. Inspired by urban culture and street fashion, these pieces are perfect for those who want to make a statement.`,
+    specifications: {
+      'Material': 'Urban street fabrics',
+      'Fit': 'Contemporary street fit',
+      'Style': 'Urban-inspired design',
+      'Comfort': 'All-day wearability',
+      'Care': 'Machine washable',
+      'Origin': 'Street culture inspired'
+    },
+    features: [
+      'Urban street style',
+      'Contemporary design',
+      'Comfortable fit',
+      'Easy care',
+      'Street culture inspired',
+      'Versatile styling'
+    ],
+    relatedProducts: [
+      {
+        id: 'trendy-fashion-hub',
+        name: 'Trendy Fashion Hub',
+        category: 'Trendy Apparel',
+        image: '/products/modern-pathway.jpg',
+        price: '$69.99'
+      },
+      {
+        id: 'modern-pathway',
+        name: 'Modern Pathway',
+        category: 'Urban Lifestyle',
+        image: '/products/modern-pathway.jpg',
+        price: '$79.99'
+      }
+    ]
   }
 }
 
