@@ -28,14 +28,17 @@ interface ContactFormProps {
   }>
 }
 
-// 图标映射
-const iconMap: Record<string, React.ComponentType<React.SVGProps<SVGSVGElement>>> = {
-  'Facebook': Facebook,
-  'Twitter': Twitter,
-  'Instagram': Instagram,
-  'Youtube': Youtube,
-  'LinkedIn': Linkedin,
-  'WhatsApp': MessageCircle,
+// 动态导入图标
+const getIconComponent = (iconName: string) => {
+  switch(iconName) {
+    case 'Facebook': return Facebook;
+    case 'Twitter': return Twitter;
+    case 'Instagram': return Instagram;
+    case 'Youtube': return Youtube;
+    case 'LinkedIn': return Linkedin;
+    case 'WhatsApp': return MessageCircle;
+    default: return null;
+  }
 }
 
 export default function ContactForm({ contactInfo, socialLinks }: ContactFormProps) {
@@ -73,6 +76,7 @@ export default function ContactForm({ contactInfo, socialLinks }: ContactFormPro
     
     alert('Message sent successfully!')
   }
+
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -128,7 +132,9 @@ export default function ContactForm({ contactInfo, socialLinks }: ContactFormPro
           <h4 className="text-lg font-semibold text-gray-900 mb-4">Follow Us:</h4>
           <div className="flex space-x-4">
             {socialLinks.map((social) => {
-              const IconComponent = iconMap[social.iconName]
+              const IconComponent = getIconComponent(social.iconName)
+              if (!IconComponent) return null
+              
               return (
                 <a
                   key={social.name}

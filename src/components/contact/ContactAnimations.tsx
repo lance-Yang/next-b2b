@@ -32,8 +32,8 @@ export function AnimatedNav({ children, className = "" }: { children: React.Reac
 }
 
 // 动画内容区域组件
-export function AnimatedContent({ children, className = "", direction = "left" }: { 
-  children: React.ReactNode; 
+export function AnimatedContent({ children, className = "", direction = "left" }: {
+  children: React.ReactNode;
   className?: string;
   direction?: "left" | "right";
 }) {
@@ -53,8 +53,8 @@ export function AnimatedContent({ children, className = "", direction = "left" }
 }
 
 // 动画标题区域组件
-export function AnimatedHeading({ children, className = "" }: { 
-  children: React.ReactNode; 
+export function AnimatedHeading({ children, className = "" }: {
+  children: React.ReactNode;
   className?: string;
 }) {
   return (
@@ -91,8 +91,8 @@ export function AnimatedButton({ children, className = "", disabled = false, typ
 }
 
 // 动画产品卡片组件
-export function AnimatedProductCard({ children, className = "", index = 0 }: { 
-  children: React.ReactNode; 
+export function AnimatedProductCard({ children, className = "", index = 0 }: {
+  children: React.ReactNode;
   className?: string;
   index?: number;
 }) {
@@ -110,8 +110,8 @@ export function AnimatedProductCard({ children, className = "", index = 0 }: {
 }
 
 // 动画链接区域组件
-export function AnimatedLinkArea({ children, className = "" }: { 
-  children: React.ReactNode; 
+export function AnimatedLinkArea({ children, className = "" }: {
+  children: React.ReactNode;
   className?: string;
 }) {
   return (
