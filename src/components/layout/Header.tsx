@@ -30,12 +30,26 @@ const themes = {
 type ThemeKey = keyof typeof themes;
 
 export function Header() {
+  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [currentTheme, setCurrentTheme] = React.useState<ThemeKey>("orange");
   const [langDropdownOpen, setLangDropdownOpen] = React.useState(false);
 
   // 国际化
   const { currentLang, setLanguage, t, languages } = useI18n();
+
+  // 检查当前路径是否匹配导航链接
+  const isActive = (path: string) => {
+    console.log('当前路径:', pathname, '检查路径:', path);
+    if (path === '/') {
+      const result = pathname === '/';
+      console.log('Home 页面选中状态:', result);
+      return result;
+    }
+    const result = pathname.startsWith(path);
+    console.log('其他页面选中状态:', result);
+    return result;
+  };
 
   // 语言下拉菜单的ref
   const langDropdownRef = React.useRef<HTMLDivElement>(null);
@@ -128,14 +142,20 @@ export function Header() {
           </div>
           <div className="hidden lg:-ml-20 lg:flex lg:flex-1 items-center justify-center">
             <Link
-              className="px-0 flex items-center justify-center nav-primary hover:text-navHover theme-transition text-base/6 font-semibold nav-item"
+              className={cn(
+                "px-0 flex items-center justify-center  hover:text-navHover theme-transition text-base/6 font-semibold nav-item",
+                isActive('/') && "text-mainColorNormal"
+              )}
               href="/"
             >
               {t.Home}
             </Link>
             <div className="h-full relative group ml-14">
               <Link
-                className="px-0 text-gray-900 hover:text-mainColorNormal theme-transition cursor-pointer h-full flex items-center gap-x-0.5 text-base/6 font-semibold nav-item"
+                className={cn(
+                  "px-0 text-gray-900 hover:text-mainColorNormal theme-transition cursor-pointer h-full flex items-center gap-x-0.5 text-base/6 font-semibold nav-item",
+                  isActive('/products') && "text-mainColorNormal"
+                )}
                 href="/products"
               >
                 {t.Products}
@@ -208,13 +228,19 @@ export function Header() {
               </div>
             </div>
             <Link
-              className="px-0 flex items-center justify-center text-gray-900 nav-hover theme-transition text-base/6 font-semibold ml-14 nav-item"
+              className={cn(
+                "px-0 flex items-center justify-center text-gray-900 nav-hover theme-transition text-base/6 font-semibold ml-14 nav-item",
+                isActive('/about') && "text-mainColorNormal"
+              )}
               href="/about"
             >
               {t.AboutUs}
             </Link>
             <Link
-              className="px-0 flex items-center justify-center text-gray-900 nav-hover theme-transition text-base/6 font-semibold ml-14 nav-item"
+              className={cn(
+                "px-0 flex items-center justify-center text-gray-900 nav-hover theme-transition text-base/6 font-semibold ml-14 nav-item",
+                isActive('/contact') && "text-mainColorNormal"
+              )}
               href="/contact"
             >
               {t.ContactUs}
@@ -326,28 +352,48 @@ export function Header() {
               <div className="space-y-2">
                 <Link
                   href="/"
-                  className="block px-3 py-2 text-base font-medium text-gray-900 nav-hover theme-transition rounded-md"
+                  className={cn(
+                    "block px-3 py-2 text-base font-medium nav-hover theme-transition rounded-md",
+                    isActive('/')
+                      ? "text-mainColorNormal bg-mainColorNormal/10"
+                      : "text-gray-900 hover:text-mainColorNormal"
+                  )}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {t.Home}
                 </Link>
                 <Link
                   href="/products"
-                  className="block px-3 py-2 text-base font-medium text-gray-900 nav-hover theme-transition rounded-md"
+                  className={cn(
+                    "block px-3 py-2 text-base font-medium nav-hover theme-transition rounded-md",
+                    isActive('/products')
+                      ? "text-mainColorNormal bg-mainColorNormal/10"
+                      : "text-gray-900 hover:text-mainColorNormal"
+                  )}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {t.Products}
                 </Link>
                 <Link
                   href="/about"
-                  className="block px-3 py-2 text-base font-medium text-gray-900 nav-hover theme-transition rounded-md"
+                  className={cn(
+                    "block px-3 py-2 text-base font-medium nav-hover theme-transition rounded-md",
+                    isActive('/about')
+                      ? "text-mainColorNormal bg-mainColorNormal/10"
+                      : "text-gray-900 hover:text-mainColorNormal"
+                  )}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {t.AboutUs}
                 </Link>
                 <Link
                   href="/contact"
-                  className="block px-3 py-2 text-base font-medium text-gray-900 nav-hover theme-transition rounded-md"
+                  className={cn(
+                    "block px-3 py-2 text-base font-medium nav-hover theme-transition rounded-md",
+                    isActive('/contact')
+                      ? "text-mainColorNormal bg-mainColorNormal/10"
+                      : "text-gray-900 hover:text-mainColorNormal"
+                  )}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {t.ContactUs}
