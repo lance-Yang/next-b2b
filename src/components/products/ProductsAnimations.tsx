@@ -3,13 +3,13 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 
-// 动画标题组件
+// 动画标题组件 - 优化版本
 export function AnimatedTitle({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
     <motion.h1
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 0.5 }}
       className={className}
     >
       {children}
@@ -17,13 +17,13 @@ export function AnimatedTitle({ children, className = "" }: { children: React.Re
   )
 }
 
-// 动画导航组件
+// 动画导航组件 - 优化版本
 export function AnimatedNav({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
     <motion.nav
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.2 }}
+      transition={{ duration: 0.4, delay: 0.1 }}
       className={className}
     >
       {children}
@@ -50,17 +50,20 @@ export function AnimatedCategoryButton({ children, className = "", onClick, acti
   )
 }
 
-// 动画产品卡片组件
-export function AnimatedProductCard({ children, className = "", index = 0 }: { 
-  children: React.ReactNode; 
+// 动画产品卡片组件 - 优化版本，减少延迟
+export function AnimatedProductCard({ children, className = "", index = 0 }: {
+  children: React.ReactNode;
   className?: string;
   index?: number;
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+      transition={{
+        duration: 0.4,
+        delay: Math.min(index * 0.05, 0.3) // 限制最大延迟为 0.3s
+      }}
       className={className}
     >
       {children}

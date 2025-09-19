@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { SendMessage } from "@/components/ui/SendMessage";
+import { PerformanceMonitor } from "@/components/ui/PerformanceMonitor";
 import { I18nProvider } from "@/lib/i18n";
 
 const inter = Inter({
@@ -88,6 +89,7 @@ export default async function RootLayout({
           <Footer />
           <ScrollToTop />
           <SendMessage />
+          <PerformanceMonitor />
         </I18nProvider>
       </body>
     </html>

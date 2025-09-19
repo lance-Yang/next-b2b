@@ -38,42 +38,43 @@ export function Header() {
   // 国际化
   const { currentLang, setLanguage, t, languages } = useI18n();
 
-  // 检查当前路径是否匹配导航链接
-  const isActive = (path: string) => {
-    console.log('当前路径:', pathname, '检查路径:', path);
+  // 检查当前路径是否匹配导航链接 - 优化版本，移除 console.log
+  const isActive = React.useCallback((path: string) => {
     if (path === '/') {
-      const result = pathname === '/';
-      console.log('Home 页面选中状态:', result);
-      return result;
+      return pathname === '/';
     }
-    const result = pathname.startsWith(path);
-    console.log('其他页面选中状态:', result);
-    return result;
-  };
+    return pathname.startsWith(path);
+  }, [pathname]);
 
   // 语言下拉菜单的ref
   const langDropdownRef = React.useRef<HTMLDivElement>(null);
 
-  // 切换主题的函数
-  const switchTheme = (themeKey: ThemeKey) => {
+  // 切换主题的函数 - 优化版本
+  const switchTheme = React.useCallback((themeKey: ThemeKey) => {
     const theme = themes[themeKey];
-
-    // 移除所有主题类
-    Object.values(themes).forEach((t) => {
-      document.documentElement.classList.remove(t.className);
+    const htmlElement = document.documentElement;
+    
+    // 使用 classList.toggle 替代多次 remove/add
+    Object.keys(themes).forEach(key => {
+      if (key !== themeKey) {
+        htmlElement.classList.remove(themes[key as ThemeKey].className);
+      }
     });
-
-    // 添加新主题类
-    document.documentElement.classList.add(theme.className);
+    
+    if (!htmlElement.classList.contains(theme.className)) {
+      htmlElement.classList.add(theme.className);
+    }
 
     setCurrentTheme(themeKey);
-    console.log(`切换到${theme.name}: ${theme.className}`);
-  };
-
-  // 组件挂载时设置默认主题
-  React.useEffect(() => {
-    switchTheme("orange");
   }, []);
+
+  // 组件挂载时设置默认主题 - 只在客户端执行
+  React.useEffect(() => {
+    // 检查是否已经设置了主题，避免重复设置
+    if (!document.documentElement.classList.contains(themes[currentTheme].className)) {
+      switchTheme(currentTheme);
+    }
+  }, [currentTheme, switchTheme]);
 
   // 点击外部关闭语言下拉菜单
   React.useEffect(() => {
@@ -147,6 +148,7 @@ export function Header() {
                 isActive('/') && "text-mainColorNormal"
               )}
               href="/"
+              prefetch={true}
             >
               {t.Home}
             </Link>
@@ -157,6 +159,7 @@ export function Header() {
                   isActive('/products') && "text-mainColorNormal"
                 )}
                 href="/products"
+                prefetch={true}
               >
                 {t.Products}
               </Link>
@@ -233,6 +236,7 @@ export function Header() {
                 isActive('/about') && "text-mainColorNormal"
               )}
               href="/about"
+              prefetch={true}
             >
               {t.AboutUs}
             </Link>
@@ -242,6 +246,7 @@ export function Header() {
                 isActive('/contact') && "text-mainColorNormal"
               )}
               href="/contact"
+              prefetch={true}
             >
               {t.ContactUs}
             </Link>
