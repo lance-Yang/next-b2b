@@ -14,8 +14,18 @@ import 'swiper/css/pagination'
 import 'swiper/css/effect-fade'
 import { Navigation, Autoplay, Pagination, EffectFade } from 'swiper/modules'
 
+// 类型定义
+type Slide = {
+  id: number
+  title: string
+  subtitle: string
+  primaryButton: string
+  secondaryButton: string
+  background: string
+}
+
 // 轮播图数据
-const slides = [
+const slides: Slide[] = [
   {
     id: 1,
     title: 'Professional\nBusiness Solutions\nfor Modern Enterprises',
@@ -45,8 +55,8 @@ const slides = [
 export function HeroSection() {
   const { t } = useI18n()
   const [currentSlide, setCurrentSlide] = useState(0)
-  const swiperRef = useRef(null)
-  
+  const swiperRef = useRef<SwiperType | null>(null)
+
   // 预加载所有图片
   useEffect(() => {
     slides.forEach((slide) => {
@@ -54,45 +64,111 @@ export function HeroSection() {
       img.src = slide.background
     })
   }, [])
-  
+
   // 处理幻灯片变化
   const handleSlideChange = (swiper: SwiperType) => {
     setCurrentSlide(swiper.realIndex)
   }
+
+  // 轮播配置
+  const swiperConfig = {
+    modules: [Navigation, Autoplay, Pagination, EffectFade],
+    spaceBetween: 0,
+    slidesPerView: 1,
+    navigation: {
+      nextEl: ".hero-swiper-next",
+      prevEl: ".hero-swiper-prev",
+    },
+    pagination: {
+      el: ".hero-swiper-pagination",
+      clickable: true,
+      renderBullet: (index: number, className: string) => {
+        return `<span class="${className} !bg-white/50 !w-3 !h-3 hover:!bg-white/75 transition-all duration-300"></span>`;
+      },
+    },
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    },
+    speed: 800,
+    effect: "fade",
+    fadeEffect: {
+      crossFade: true,
+    },
+    loop: slides.length > 1,
+    onSlideChange: handleSlideChange,
+  }
+
+  // 自定义按钮
+  const NavButton = ({
+    direction,
+    className
+  }: {
+    direction: "prev" | "next",
+    className: string
+  }) => (
+    <motion.button
+      className={className}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
+      aria-label={direction === "prev" ? "Previous slide" : "Next slide"}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={2}
+        stroke="currentColor"
+        className="w-6 h-6 text-white"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d={direction === "prev" ? "M15.75 19.5L8.25 12l7.5-7.5" : "M8.25 4.5l7.5 7.5-7.5 7.5"}
+        />
+      </svg>
+    </motion.button>
+  )
   
+  // 创建按钮组件
+  const ActionButton = ({
+    href,
+    isPrimary,
+    children
+  }: {
+    href: string,
+    isPrimary?: boolean,
+    children: React.ReactNode
+  }) => {
+    const primaryStyles = "bg-orange-500 hover:bg-orange-600 text-white"
+    const secondaryStyles = "border-2 border-white text-white hover:bg-white hover:text-gray-900"
+
+    return (
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      >
+        <Link
+          href={href}
+          className={`${isPrimary ? primaryStyles : secondaryStyles} px-8 py-4 rounded-lg font-semibold transition-all inline-flex items-center gap-2 text-lg cursor-pointer`}
+        >
+          {children}
+          {isPrimary && <ArrowRight className="w-5 h-5" />}
+        </Link>
+      </motion.div>
+    )
+  }
+
   const currentSlideData = slides[currentSlide]
-  
+
   return (
     <section className="relative h-[500px] lg:h-[600px] overflow-hidden">
       <Swiper
         ref={swiperRef}
         className="w-full h-full hero-swiper"
-        modules={[Navigation, Autoplay, Pagination, EffectFade]}
-        spaceBetween={0}
-        slidesPerView={1}
-        navigation={{
-          nextEl: ".hero-swiper-next",
-          prevEl: ".hero-swiper-prev",
-        }}
-        pagination={{
-          el: ".hero-swiper-pagination",
-          clickable: true,
-          renderBullet: (index, className) => {
-            return `<span class="${className} !bg-white/50 !w-3 !h-3 hover:!bg-white/75 transition-all duration-300"></span>`;
-          },
-        }}
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: true,
-        }}
-        speed={800}
-        effect="fade"
-        fadeEffect={{
-          crossFade: true,
-        }}
-        loop={slides.length > 1}
-        onSlideChange={handleSlideChange}
+        {...swiperConfig}
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={slide.id}>
@@ -109,10 +185,10 @@ export function HeroSection() {
                 placeholder="blur"
                 blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
               />
-              
+
               {/* 覆盖层 */}
               <div className="absolute inset-0 bg-black/40" />
-              
+
               {/* 中心内容 */}
               <div className="relative z-10 h-full flex items-center justify-center">
                 <div className="text-center text-white px-4 max-w-4xl mx-auto">
@@ -128,37 +204,18 @@ export function HeroSection() {
                         </span>
                       ))}
                     </h1>
-                    
+
                     <p className="text-lg md:text-xl text-white/95 mb-8 max-w-2xl mx-auto drop-shadow-md">
                       {slide.subtitle}
                     </p>
-                    
+
                     <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                      <motion.div
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                      >
-                        <Link
-                          href="/products"
-                          className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-lg font-semibold transition-colors inline-flex items-center gap-2 text-lg cursor-pointer"
-                        >
-                          {t.GetAFreeQuote || slide.primaryButton}
-                          <ArrowRight className="w-5 h-5" />
-                        </Link>
-                      </motion.div>
-                      <motion.div
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                      >
-                        <Link
-                          href="/about"
-                          className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg font-semibold transition-all text-lg cursor-pointer"
-                        >
-                          {t.ViewMore || slide.secondaryButton}
-                        </Link>
-                      </motion.div>
+                      <ActionButton href="/products" isPrimary>
+                        {t.GetAFreeQuote || slide.primaryButton}
+                      </ActionButton>
+                      <ActionButton href="/about">
+                        {t.ViewMore || slide.secondaryButton}
+                      </ActionButton>
                     </div>
                   </motion.div>
                 </div>
@@ -171,29 +228,17 @@ export function HeroSection() {
       {/* 自定义导航按钮 */}
       {slides.length > 1 && (
         <>
-          <motion.button 
+          <NavButton
+            direction="prev"
             className="hero-swiper-prev absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/20 hover:bg-white/40 transition-all duration-200 cursor-pointer border-none outline-none"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            aria-label="Previous slide"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 text-white">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-            </svg>
-          </motion.button>
-          <motion.button 
+          />
+          <NavButton
+            direction="next"
             className="hero-swiper-next absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/20 hover:bg-white/40 transition-all duration-200 cursor-pointer border-none outline-none"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            aria-label="Next slide"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 text-white">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-            </svg>
-          </motion.button>
+          />
         </>
       )}
-      
+
       {/* 自定义分页指示器 */}
       <div className="hero-swiper-pagination absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex space-x-3"></div>
     </section>

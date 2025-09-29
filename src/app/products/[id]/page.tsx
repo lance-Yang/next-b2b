@@ -1,8 +1,33 @@
-import { ProductDetailPage } from '../../../components/products/ProductDetailPage'
+import { ProductDetailPage } from '@/components/products/ProductDetailPage'
 import { notFound } from 'next/navigation'
 
+// 类型定义
+export interface ProductDetailData {
+  id: string;
+  name: string;
+  price: string;
+  category: string;
+  images: string[];
+  description: string;
+  specifications: Record<string, string>;
+  features: string[];
+  relatedProducts: {
+    id: string;
+    name: string;
+    category: string;
+    image: string;
+    price: string;
+  }[];
+}
+
+interface ProductDetailProps {
+  params: Promise<{
+    id: string
+  }>
+}
+
 // 示例产品数据 - 实际项目中应该从API或数据库获取
-const productData = {
+const productData: Record<string, ProductDetailData> = {
   'outdoor-adventure-essentials': {
     id: 'outdoor-adventure-essentials',
     name: 'Outdoor Adventure Essentials',
@@ -520,8 +545,8 @@ interface ProductDetailProps {
 
 export default async function ProductDetail({ params }: ProductDetailProps) {
   const { id } = await params
-  const product = productData[id as keyof typeof productData]
-  
+  const product = productData[id]
+
   if (!product) {
     notFound()
   }
@@ -529,28 +554,37 @@ export default async function ProductDetail({ params }: ProductDetailProps) {
   return <ProductDetailPage product={product} />
 }
 
+/**
+ * 生成所有产品的静态路径
+ */
 export function generateStaticParams() {
   return Object.keys(productData).map((id) => ({
     id,
   }))
 }
 
+/**
+ * 生成产品页面的元数据
+ */
 export async function generateMetadata({ params }: ProductDetailProps) {
   const { id } = await params
-  const product = productData[id as keyof typeof productData]
-  
+  const product = productData[id]
+
   if (!product) {
     return {
       title: 'Product Not Found',
     }
   }
 
+  // 截取描述前160个字符作为描述
+  const description = product.description.substring(0, 160)
+
   return {
     title: `${product.name} - B2B Solutions`,
-    description: product.description.substring(0, 160),
+    description,
     openGraph: {
       title: product.name,
-      description: product.description.substring(0, 160),
+      description,
       images: [product.images[0]],
     },
   }

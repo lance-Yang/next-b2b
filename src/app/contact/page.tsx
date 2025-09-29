@@ -10,6 +10,29 @@ import {
 } from "@/components/contact/ContactAnimations";
 import ContactForm from "@/components/contact/ContactForm";
 
+// 类型定义
+type ContactInfo = {
+  email: string;
+  phone: string;
+  address: string;
+};
+
+type SocialLink = {
+  name: string;
+  iconName: string;
+  href: string;
+  color: string;
+};
+
+type Product = {
+  id: string;
+  name: string;
+  category: string;
+  image: string;
+  bgColor: string;
+};
+
+// 页面元数据
 export const metadata = {
   title: "Contact Us | Get in Touch with Our Team",
   description:
@@ -25,14 +48,14 @@ export const metadata = {
 };
 
 // 联系信息
-const contactInfo = {
+const contactInfo: ContactInfo = {
   email: "kefu308@gmail.com",
   phone: "+86-17801460534",
   address: "No. 2875 Beichen West Road, Shaoxing, Zhejiang, China",
 };
 
 // 社交媒体链接
-const socialLinks = [
+const socialLinks: SocialLink[] = [
   { name: "Facebook", iconName: "Facebook", href: "#", color: "text-blue-600" },
   { name: "Twitter", iconName: "Twitter", href: "#", color: "text-blue-400" },
   {
@@ -52,7 +75,7 @@ const socialLinks = [
 ];
 
 // 推荐产品
-const recommendedProducts = [
+const recommendedProducts: Product[] = [
   {
     id: "outdoor-adventure-essentials",
     name: "Outdoor Adventure Essentials",
@@ -84,109 +107,122 @@ const recommendedProducts = [
 ];
 
 export default function ContactPage() {
+  const containerStyles = "container mx-auto px-4 sm:px-6 lg:px-8";
+
+  // 辅助组件
+  const Hero = () => (
+    <div className="relative bg-gradient-to-r from-orange-200/50 to-orange-100/50 py-20 overflow-hidden">
+      {/* 背景图片 */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-gray-600/20" />
+        <div className="w-full h-full bg-gradient-to-r from-orange-100/80 to-orange-50/60" />
+      </div>
+
+      <div className={`${containerStyles} relative z-10`}>
+        <div className="text-center">
+          <AnimatedTitle className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Contact Us
+          </AnimatedTitle>
+
+          {/* 面包屑导航 */}
+          <AnimatedNav className="flex items-center justify-center space-x-2 text-sm text-gray-600">
+            <Link
+              href="/"
+              className="hover:text-orange-600 transition-colors"
+            >
+              Home
+            </Link>
+            <span>/</span>
+            <span className="text-gray-900 font-medium">Contact Us</span>
+          </AnimatedNav>
+        </div>
+      </div>
+    </div>
+  );
+
+  const SectionTitle = ({ title, subtitle }: { title: string, subtitle?: string }) => (
+    <AnimatedHeading>
+      <div className="w-16 h-1 bg-orange-500 mx-auto mb-4" />
+      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        {title}
+      </h2>
+      {subtitle && (
+        <p className="text-gray-600 max-w-2xl mx-auto">
+          {subtitle}
+        </p>
+      )}
+    </AnimatedHeading>
+  );
+
+  const ProductCard = ({ product }: { product: Product }) => (
+    <AnimatedProductCard
+      key={product.id}
+      index={0}
+      className="group"
+    >
+      <Link href={`/products/${product.id}`}>
+        <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+          {/* 产品图片 */}
+          <div className="relative aspect-square overflow-hidden">
+            <div className={`absolute inset-0 ${product.bgColor} flex items-center justify-center`}>
+              <Image
+                src={product.image}
+                alt={product.name}
+                fill
+                className="object-cover group-hover:scale-110 transition-transform duration-700"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              />
+            </div>
+          </div>
+
+          {/* 产品信息 */}
+          <div className="p-6 text-center">
+            <h3 className="text-lg font-semibold text-gray-900 group-hover:text-orange-600 transition-colors duration-300 mb-2">
+              {product.name}
+            </h3>
+            <p className="text-gray-500 text-sm">
+              {product.category}
+            </p>
+          </div>
+        </div>
+      </Link>
+    </AnimatedProductCard>
+  );
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero区域 */}
-      <div className="relative bg-gradient-to-r from-orange-200/50 to-orange-100/50 py-20 overflow-hidden">
-        {/* 背景图片 */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gray-600/20" />
-          <div className="w-full h-full bg-gradient-to-r from-orange-100/80 to-orange-50/60" />
-        </div>
-
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center">
-            <AnimatedTitle className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Contact Us
-            </AnimatedTitle>
-
-            {/* 面包屑导航 */}
-            <AnimatedNav className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-              <Link
-                href="/"
-                className="hover:text-orange-600 transition-colors"
-              >
-                Home
-              </Link>
-              <span>/</span>
-              <span className="text-gray-900 font-medium">Contact Us</span>
-            </AnimatedNav>
-          </div>
-        </div>
-      </div>
+      <Hero />
 
       {/* 主要内容区域 */}
       <div className="bg-mainColorLight py-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className={containerStyles}>
           {/* Get In Touch 标题 */}
           <div className="text-center mb-12">
-            <AnimatedHeading>
-              <div className="w-16 h-1 bg-orange-500 mx-auto mb-4" />
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Get In Touch
-              </h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
-                We&apos;re here to help and answer any question you might have
-              </p>
-            </AnimatedHeading>
+            <SectionTitle
+              title="Get In Touch"
+              subtitle="We're here to help and answer any question you might have"
+            />
           </div>
 
           {/* 联系表单和信息区域 */}
           <ContactForm contactInfo={contactInfo} socialLinks={socialLinks} />
         </div>
       </div>
+
       {/* 推荐产品区域 */}
       <div className="bg-white py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className={containerStyles}>
           <div className="text-center mb-12">
-            <AnimatedHeading>
-              <div className="w-16 h-1 bg-orange-500 mx-auto mb-4" />
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Recommended For You
-              </h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
-                Discover our most popular products that match your style and
-                needs
-              </p>
-            </AnimatedHeading>
+            <SectionTitle
+              title="Recommended For You"
+              subtitle="Discover our most popular products that match your style and needs"
+            />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {recommendedProducts.map((product, index) => (
-              <AnimatedProductCard
-                key={product.id}
-                index={index}
-                className="group"
-              >
-                <Link href={`/products/${product.id}`}>
-                  <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                    {/* 产品图片 */}
-                    <div className="relative aspect-square overflow-hidden">
-                      <div
-                        className={`absolute inset-0 ${product.bgColor} flex items-center justify-center`}
-                      >
-                        <Image
-                          src={product.image}
-                          alt={product.name}
-                          fill
-                          className="object-cover group-hover:scale-110 transition-transform duration-700"
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                        />
-                      </div>
-                    </div>
-
-                    {/* 产品信息 */}
-                    <div className="p-6 text-center">
-                      <h3 className="text-lg font-semibold text-gray-900 group-hover:text-orange-600 transition-colors duration-300 mb-2">
-                        {product.name}
-                      </h3>
-                      <p className="text-gray-500 text-sm">
-                        {product.category}
-                      </p>
-                    </div>
-                  </div>
-                </Link>
-              </AnimatedProductCard>
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
 

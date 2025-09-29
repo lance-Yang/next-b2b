@@ -1,14 +1,27 @@
 import React from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
-import ProductsStateHandler from '../../components/products/ProductsStateHandler'
+import ProductsStateHandler from '@/components/products/ProductsStateHandler'
 import {
   AnimatedTitle,
   AnimatedNav,
-  AnimatedProductCard,
-  AnimatedContent,
-} from '../../components/products/ProductsAnimations'
+} from '@/components/products/ProductsAnimations'
 
+// 类型定义
+type Category = {
+  id: string;
+  label: string;
+  active?: boolean;
+}
+
+type Product = {
+  id: string;
+  name: string;
+  category: string;
+  image: string;
+  bgColor: string;
+}
+
+// 页面元数据
 export const metadata = {
   title: 'Products | B2B Solutions',
   description: 'Explore our comprehensive range of high-quality products designed for various industries and applications.',
@@ -16,7 +29,7 @@ export const metadata = {
 }
 
 // 产品分类
-const categories = [
+const categories: Category[] = [
   { id: 'all', label: 'All', active: true },
   { id: 'sport-gear', label: 'Sport Gear' },
   { id: 'outdoor-adventure', label: 'Outdoor Adventure' },
@@ -26,7 +39,7 @@ const categories = [
 ]
 
 // 产品数据
-const products = [
+const products: Product[] = [
   {
     id: 'outdoor-adventure-essentials',
     name: 'Outdoor Adventure Essentials',
@@ -113,33 +126,42 @@ const products = [
   },
 ]
 
+// 页面样式配置
+const containerStyles = "container mx-auto px-4 sm:px-6 lg:px-8"
+
 export default function ProductsPage() {
+  // 助手组件
+  const Hero = () => (
+    <div className="bg-orange-100 py-16">
+      <div className={containerStyles}>
+        <div className="text-center">
+          <AnimatedTitle className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Products
+          </AnimatedTitle>
+
+          {/* 面包屑导航 */}
+          <AnimatedNav className="flex items-center justify-center space-x-2 text-sm text-gray-600">
+            <Link href="/" className="hover:text-orange-600 transition-colors">
+              Home
+            </Link>
+            <span>/</span>
+            <span className="text-gray-900 font-medium">Products</span>
+          </AnimatedNav>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero区域带面包屑 */}
-      <div className="bg-orange-100 py-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <AnimatedTitle className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Products
-            </AnimatedTitle>
-            
-            {/* 面包屑导航 */}
-            <AnimatedNav className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-              <Link href="/" className="hover:text-orange-600 transition-colors">
-                Home
-              </Link>
-              <span>/</span>
-              <span className="text-gray-900 font-medium">Products</span>
-            </AnimatedNav>
-          </div>
-        </div>
-      </div>
+      <Hero />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className={`${containerStyles} py-12`}>
         <ProductsStateHandler
           categories={categories}
           products={products}
+          itemsPerPage={8}
         />
       </div>
     </div>
