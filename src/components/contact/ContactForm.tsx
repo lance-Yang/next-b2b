@@ -5,7 +5,7 @@ import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Youtube, Linkedin, M
 import {
   AnimatedContent,
   AnimatedButton
-} from './ContactAnimations'
+} from '@/components/ui/animations'
 
 interface FormData {
   name: string

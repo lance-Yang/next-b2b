@@ -4,7 +4,7 @@ import { useState } from 'react'
 import {
   AnimatedCategoryButton,
   AnimatedPaginationButton,
-} from './ProductsAnimations'
+} from '@/components/ui/animations'
 import ProductsList from './ProductsList'
 
 interface ProductsStateHandlerProps {

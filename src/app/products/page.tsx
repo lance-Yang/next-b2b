@@ -4,7 +4,7 @@ import ProductsStateHandler from '@/components/products/ProductsStateHandler'
 import {
   AnimatedTitle,
   AnimatedNav,
-} from '@/components/products/ProductsAnimations'
+} from '@/components/ui/animations'
 
 // 类型定义
 type Category = {

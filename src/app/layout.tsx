@@ -7,6 +7,7 @@ import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { SendMessage } from "@/components/ui/SendMessage";
 import { PerformanceMonitor } from "@/components/ui/PerformanceMonitor";
 import { I18nProvider } from "@/lib/i18n";
+import { ThemeProvider } from "@/components/ui/ThemeToggle";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -83,14 +84,16 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head></head>
       <body className={`${inter.className} bg-white overflow-x-hidden`}>
-        <I18nProvider>
-          <Header />
-          <main>{children}</main>
-          <Footer />
-          <ScrollToTop />
-          <SendMessage />
-          <PerformanceMonitor />
-        </I18nProvider>
+        <ThemeProvider>
+          <I18nProvider>
+            <Header />
+            <main>{children}</main>
+            <Footer />
+            <ScrollToTop />
+            <SendMessage />
+            <PerformanceMonitor />
+          </I18nProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

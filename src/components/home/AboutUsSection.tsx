@@ -144,7 +144,7 @@ export function AboutUsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className={`bg-mainColorLight rounded-2xl p-6 text-center`}
+              className={`bg-brand-light rounded-2xl p-6 text-center`}
             >
               <div className="text-3xl md:text-4xl font-bold text-orange-600 mb-2">
                 {stat.number}

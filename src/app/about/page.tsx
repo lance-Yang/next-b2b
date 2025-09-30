@@ -6,11 +6,11 @@ import {
   AnimatedTitle,
   AnimatedNav,
   AnimatedContent,
-  AnimatedStatCard,
-  AnimatedAdvantageCard,
-  AnimatedFactoryImage,
-  AnimatedContactSection,
-} from '@/components/about/AboutAnimations';
+  AnimatedCard as AnimatedStatCard,
+  AnimatedCard as AnimatedAdvantageCard,
+  AnimatedImage as AnimatedFactoryImage,
+  AnimatedSection as AnimatedContactSection,
+} from '@/components/ui/animations';
 
 // 页面元数据
 export const metadata = {
@@ -142,9 +142,9 @@ export default function AboutPage() {
   // 组件样式配置
   const sectionStyles = {
     hero: "relative bg-blue-900 py-16 overflow-hidden",
-    whoWeAre: "bg-mainColorLight py-8 lg:py-20",
+    whoWeAre: "bg-brand-light py-8 lg:py-20",
     mission: "bg-white py-10 lg:py-20",
-    advantages: "py-16 bg-mainColorLight",
+    advantages: "py-16 bg-brand-light",
     factory: "py-16 bg-white",
     contact: "py-16 bg-gray-900 relative overflow-hidden"
   };
@@ -227,9 +227,9 @@ export default function AboutPage() {
                 <AnimatedStatCard
                   key={index}
                   index={index}
-                  className="bg-mainColorLight p-6 rounded-lg"
+                  className="bg-brand-light p-6 rounded-lg"
                 >
-                  <dd className="text-4xl font-semibold tracking-tight text-mainColorNormal mb-2">
+                  <dd className="text-4xl font-semibold tracking-tight text-brand-primary mb-2">
                     {stat.number}
                   </dd>
                   <dt className="text-sm text-gray-600">{stat.label}</dt>

@@ -6,39 +6,17 @@ import { usePathname } from "next/navigation";
 import { Menu, X, Globe, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useI18n, Language } from "@/lib/i18n";
-
-// 主题配置
-const themes = {
-  orange: {
-    name: "橙色主题",
-    className: "theme-orange",
-  },
-  blue: {
-    name: "蓝色主题",
-    className: "theme-blue",
-  },
-  green: {
-    name: "绿色主题",
-    className: "theme-green",
-  },
-  purple: {
-    name: "紫色主题",
-    className: "theme-purple",
-  },
-} as const;
-
-type ThemeKey = keyof typeof themes;
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export function Header() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
-  const [currentTheme, setCurrentTheme] = React.useState<ThemeKey>("orange");
   const [langDropdownOpen, setLangDropdownOpen] = React.useState(false);
 
   // 国际化
   const { currentLang, setLanguage, t, languages } = useI18n();
 
-  // 检查当前路径是否匹配导航链接 - 优化版本，移除 console.log
+  // 检查当前路径是否匹配导航链接
   const isActive = React.useCallback((path: string) => {
     if (path === '/') {
       return pathname === '/';
@@ -48,33 +26,6 @@ export function Header() {
 
   // 语言下拉菜单的ref
   const langDropdownRef = React.useRef<HTMLDivElement>(null);
-
-  // 切换主题的函数 - 优化版本
-  const switchTheme = React.useCallback((themeKey: ThemeKey) => {
-    const theme = themes[themeKey];
-    const htmlElement = document.documentElement;
-    
-    // 使用 classList.toggle 替代多次 remove/add
-    Object.keys(themes).forEach(key => {
-      if (key !== themeKey) {
-        htmlElement.classList.remove(themes[key as ThemeKey].className);
-      }
-    });
-    
-    if (!htmlElement.classList.contains(theme.className)) {
-      htmlElement.classList.add(theme.className);
-    }
-
-    setCurrentTheme(themeKey);
-  }, []);
-
-  // 组件挂载时设置默认主题 - 只在客户端执行
-  React.useEffect(() => {
-    // 检查是否已经设置了主题，避免重复设置
-    if (!document.documentElement.classList.contains(themes[currentTheme].className)) {
-      switchTheme(currentTheme);
-    }
-  }, [currentTheme, switchTheme]);
 
   // 点击外部关闭语言下拉菜单
   React.useEffect(() => {
@@ -97,31 +48,6 @@ export function Header() {
 
   return (
     <div className="sticky top-0 z-50">
-      {/* 测试标题栏 */}
-      {/* <div className="bg-brand-light border-b border-brand-primary/20 px-4 theme-transition">
-        <div className="max-w-7xl mx-auto py-2 flex justify-between items-center">
-          <h1 className="text-brand-primary font-semibold theme-transition">
-            🎨 自定义CSS主题测试 - 当前: {themes[currentTheme].name}
-          </h1>
-          <div className="flex gap-2">
-            {Object.entries(themes).map(([key, theme]) => (
-              <button
-                key={key}
-                onClick={() => switchTheme(key as ThemeKey)}
-                className={cn(
-                  "px-3 py-1 rounded text-sm theme-transition theme-button",
-                  currentTheme === key
-                    ? "bg-brand-primary text-white"
-                    : "bg-white text-brand-primary border border-brand-primary hover:bg-brand-primary hover:text-white"
-                )}
-              >
-                {theme.name}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-       */}
       <header
         className="bg-white shadow-sm px-4 lg:px-4 md:px-4"
         style={{ position: "relative", zIndex: 55 }}
@@ -133,11 +59,6 @@ export function Header() {
           <div className="flex items-center">
             <a className="-m-1.5 p-1.5" href="index.html">
               <span className="sr-only">Logo</span>
-              {/* <img
-                alt="logo"
-                src="upload/img/logo.png.jpeg"
-                className="h-12 w-auto"
-              /> */}
               Logo
             </a>
           </div>
@@ -254,6 +175,11 @@ export function Header() {
 
           {/* 右侧操作区 */}
           <div className="flex items-center ml-auto space-x-4">
+            {/* 主题切换 */}
+            <div className="hidden lg:block">
+              <ThemeToggle variant="compact" />
+            </div>
+
             {/* 语言切换 */}
             <div className="relative" ref={langDropdownRef}>
               <button
@@ -303,35 +229,6 @@ export function Header() {
                 </div>
               )}
             </div>
-
-            {/* 主题切换 (可选) */}
-            {/* <div className="hidden xl:flex items-center gap-2">
-              {Object.entries(themes).map(([key, theme]) => (
-                <button
-                  key={key}
-                  onClick={() => switchTheme(key as ThemeKey)}
-                  className={cn(
-                    "w-6 h-6 rounded-full border-2 theme-transition",
-                    currentTheme === key
-                      ? "border-gray-900 scale-110"
-                      : "border-gray-300 hover:border-gray-500"
-                  )}
-                  style={{
-                    backgroundColor:
-                      key === "orange"
-                        ? "#F77220"
-                        : key === "blue"
-                        ? "#3366FF"
-                        : key === "green"
-                        ? "#10B981"
-                        : key === "purple"
-                        ? "#8B5CF6"
-                        : "#F77220",
-                  }}
-                  title={theme.name}
-                />
-              ))}
-            </div> */}
           </div>
 
           <div className="flex ml-4 lg:hidden">
@@ -352,130 +249,125 @@ export function Header() {
 
         {/* 移动端菜单 */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-white border-t border-gray-200">
-            <div className="px-6 py-4 space-y-4">
-              <div className="space-y-2">
-                <Link
-                  href="/"
-                  className={cn(
-                    "block px-3 py-2 text-base font-medium nav-hover theme-transition rounded-md",
-                    isActive('/')
-                      ? "text-mainColorNormal bg-mainColorNormal/10"
-                      : "text-gray-900 hover:text-mainColorNormal"
-                  )}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {t.Home}
-                </Link>
-                <Link
-                  href="/products"
-                  className={cn(
-                    "block px-3 py-2 text-base font-medium nav-hover theme-transition rounded-md",
-                    isActive('/products')
-                      ? "text-mainColorNormal bg-mainColorNormal/10"
-                      : "text-gray-900 hover:text-mainColorNormal"
-                  )}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {t.Products}
-                </Link>
-                <Link
-                  href="/about"
-                  className={cn(
-                    "block px-3 py-2 text-base font-medium nav-hover theme-transition rounded-md",
-                    isActive('/about')
-                      ? "text-mainColorNormal bg-mainColorNormal/10"
-                      : "text-gray-900 hover:text-mainColorNormal"
-                  )}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {t.AboutUs}
-                </Link>
-                <Link
-                  href="/contact"
-                  className={cn(
-                    "block px-3 py-2 text-base font-medium nav-hover theme-transition rounded-md",
-                    isActive('/contact')
-                      ? "text-mainColorNormal bg-mainColorNormal/10"
-                      : "text-gray-900 hover:text-mainColorNormal"
-                  )}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {t.ContactUs}
-                </Link>
-              </div>
-
-              {/* 移动端语言切换 */}
-              <div className="border-t border-gray-200 pt-4">
-                <div className="px-3 py-2 text-sm font-medium text-gray-500 uppercase tracking-wide">
-                  Language / 语言
-                </div>
-                <div className="space-y-1">
-                  {Object.entries(languages).map(([code, lang]) => (
-                    <button
-                      key={code}
-                      onClick={() => {
-                        setLanguage(code as Language);
-                        setMobileMenuOpen(false);
-                      }}
-                      className={cn(
-                        "w-full flex items-center gap-3 px-3 py-2 text-left rounded-md transition-colors",
-                        currentLang === code
-                          ? "bg-orange-50 text-orange-700 font-medium"
-                          : "text-gray-700 hover:bg-gray-50 hover:text-gray-900"
-                      )}
-                    >
-                      <span className="text-lg">{lang.flag}</span>
-                      <span className="flex-1">{lang.name}</span>
-                      {currentLang === code && (
-                        <span className="text-orange-600">✓</span>
-                      )}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* 移动端主题切换 */}
-              <div className="border-t border-gray-200 pt-4">
-                <div className="px-3 py-2 text-sm font-medium text-gray-500 uppercase tracking-wide">
-                  Theme / 主题
-                </div>
-                <div className="flex items-center gap-3 px-3">
-                  {Object.entries(themes).map(([key, theme]) => (
-                    <button
-                      key={key}
-                      onClick={() => switchTheme(key as ThemeKey)}
-                      className={cn(
-                        "w-8 h-8 rounded-full border-2 theme-transition flex items-center justify-center",
-                        currentTheme === key
-                          ? "border-gray-900 scale-110 ring-2 ring-gray-300"
-                          : "border-gray-300 hover:border-gray-500"
-                      )}
-                      style={{
-                        backgroundColor:
-                          key === "orange"
-                            ? "#F77220"
-                            : key === "blue"
-                            ? "#3366FF"
-                            : key === "green"
-                            ? "#10B981"
-                            : key === "purple"
-                            ? "#8B5CF6"
-                            : "#F77220",
-                      }}
-                      title={theme.name}
-                    >
-                      {currentTheme === key && (
-                        <span className="text-white text-xs">✓</span>
-                      )}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
+          <MobileMenu
+            isActive={isActive}
+            languages={languages}
+            currentLang={currentLang}
+            setLanguage={setLanguage}
+            setMobileMenuOpen={setMobileMenuOpen}
+            t={t}
+          />
         )}
       </header>
+    </div>
+  );
+}
+
+// 移动端菜单组件
+function MobileMenu({
+  isActive,
+  languages,
+  currentLang,
+  setLanguage,
+  setMobileMenuOpen,
+  t
+}: {
+  isActive: (path: string) => boolean;
+  languages: Record<string, { flag: string; name: string }>;
+  currentLang: string;
+  setLanguage: (lang: Language) => void;
+  setMobileMenuOpen: (open: boolean) => void;
+  t: Record<string, string>;
+}) {
+  return (
+    <div className="lg:hidden bg-white border-t border-gray-200">
+      <div className="px-6 py-4 space-y-4">
+        <div className="space-y-2">
+          <Link
+            href="/"
+            className={cn(
+              "block px-3 py-2 text-base font-medium nav-hover theme-transition rounded-md",
+              isActive('/')
+                ? "text-mainColorNormal bg-mainColorNormal/10"
+                : "text-gray-900 hover:text-mainColorNormal"
+            )}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            {t.Home}
+          </Link>
+          <Link
+            href="/products"
+            className={cn(
+              "block px-3 py-2 text-base font-medium nav-hover theme-transition rounded-md",
+              isActive('/products')
+                ? "text-mainColorNormal bg-mainColorNormal/10"
+                : "text-gray-900 hover:text-mainColorNormal"
+            )}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            {t.Products}
+          </Link>
+          <Link
+            href="/about"
+            className={cn(
+              "block px-3 py-2 text-base font-medium nav-hover theme-transition rounded-md",
+              isActive('/about')
+                ? "text-mainColorNormal bg-mainColorNormal/10"
+                : "text-gray-900 hover:text-mainColorNormal"
+            )}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            {t.AboutUs}
+          </Link>
+          <Link
+            href="/contact"
+            className={cn(
+              "block px-3 py-2 text-base font-medium nav-hover theme-transition rounded-md",
+              isActive('/contact')
+                ? "text-mainColorNormal bg-mainColorNormal/10"
+                : "text-gray-900 hover:text-mainColorNormal"
+            )}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            {t.ContactUs}
+          </Link>
+        </div>
+
+        {/* 移动端主题切换 */}
+        <div className="border-t border-gray-200 pt-4">
+          <ThemeToggle variant="detailed" />
+        </div>
+
+        {/* 移动端语言切换 */}
+        <div className="border-t border-gray-200 pt-4">
+          <div className="px-3 py-2 text-sm font-medium text-gray-500 uppercase tracking-wide">
+            Language / 语言
+          </div>
+          <div className="space-y-1">
+            {Object.entries(languages).map(([code, lang]: [string, { flag: string; name: string }]) => (
+              <button
+                key={code}
+                onClick={() => {
+                  setLanguage(code as Language);
+                  setMobileMenuOpen(false);
+                }}
+                className={cn(
+                  "w-full flex items-center gap-3 px-3 py-2 text-left rounded-md transition-colors",
+                  currentLang === code
+                    ? "bg-orange-50 text-orange-700 font-medium"
+                    : "text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+                )}
+              >
+                <span className="text-lg">{lang.flag}</span>
+                <span className="flex-1">{lang.name}</span>
+                {currentLang === code && (
+                  <span className="text-orange-600">✓</span>
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

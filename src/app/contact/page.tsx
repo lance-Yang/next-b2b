@@ -5,9 +5,9 @@ import {
   AnimatedTitle,
   AnimatedNav,
   AnimatedHeading,
-  AnimatedProductCard,
+  AnimatedCard as AnimatedProductCard,
   AnimatedLinkArea,
-} from "@/components/contact/ContactAnimations";
+} from "@/components/ui/animations";
 import ContactForm from "@/components/contact/ContactForm";
 
 // 类型定义
@@ -195,7 +195,7 @@ export default function ContactPage() {
       <Hero />
 
       {/* 主要内容区域 */}
-      <div className="bg-mainColorLight py-16">
+      <div className="bg-brand-light py-16">
         <div className={containerStyles}>
           {/* Get In Touch 标题 */}
           <div className="text-center mb-12">

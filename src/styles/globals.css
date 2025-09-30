@@ -66,56 +66,7 @@
   --color-error: 0 84% 60%;      /* 错误色(红色) */
   --color-info: 217 91% 60%;     /* 信息色(蓝色) */
 
-  /* ---------- 多模板主题颜色系统 ---------- */
-  /* 默认模板(001) - 橙色系 */
-  --main-color-light-001: 22 93% 90%;
-  --main-color-normal-001: 22 93% 55%;
-  --main-color-deep-001: 22 93% 50%;
-
-  /* 模板002 - 浅橙色系 */
-  --main-color-light-002: 36 100% 95%;
-  --main-color-normal-002: 36 100% 46%;
-  --main-color-deep-002: 36 100% 40%;
-
-  /* 模板003 - 浅黄色系 */
-  --main-color-light-003: 37 56% 95%;
-  --main-color-normal-003: 37 56% 57%;
-  --main-color-deep-003: 37 56% 50%;
-
-  /* 模板004 - 蓝色系 */
-  --main-color-light-004: 215 100% 95%;
-  --main-color-normal-004: 215 100% 30%;
-  --main-color-deep-004: 215 100% 26%;
-
-  /* 模板005 - 浅蓝色系 */
-  --main-color-light-005: 216 100% 95%;
-  --main-color-normal-005: 216 100% 50%;
-  --main-color-deep-005: 216 100% 40%;
-
-  /* 模板006 - 粉色系 */
-  --main-color-light-006: 331 95% 95%;
-  --main-color-normal-006: 331 95% 68%;
-  --main-color-deep-006: 331 78% 63%;
-
-  /* 模板007 - 红色系 */
-  --main-color-light-007: 0 91% 95%;
-  --main-color-normal-007: 0 91% 55%;
-  --main-color-deep-007: 0 91% 63%;
-
-  /* 模板008 - 绿色系 */
-  --main-color-light-008: 136 60% 90%;
-  --main-color-normal-008: 136 60% 43%;
-  --main-color-deep-008: 136 60% 35%;
-
-  /* 模板009 - 薄荷绿 */
-  --main-color-light-009: 123 42% 90%;
-  --main-color-normal-009: 123 42% 56%;
-  --main-color-deep-009: 123 42% 50%;
-
-  /* 模板010 - 橙色系(备用) */
-  --main-color-light-010: 22 93% 90%;
-  --main-color-normal-010: 22 93% 55%;
-  --main-color-deep-010: 22 93% 50%;
+  /* 预留多模板主题空间 - 如需要可在JavaScript中动态切换 */
 }
 
 /* Tailwind基于的按钮样式已通过类组合实现，无需单独定义 */
@@ -225,6 +176,75 @@
   border-color: rgb(247, 114, 32);
 }
 
+/* 覆盖常用的橙色样式 */
+.theme-orange .bg-orange-50 {
+  background-color: rgb(255, 239, 230) !important;
+}
+
+.theme-orange .bg-orange-100 {
+  background-color: rgb(255, 230, 210) !important;
+}
+
+.theme-orange .bg-orange-200 {
+  background-color: rgb(254, 215, 170) !important;
+}
+
+.theme-orange .bg-orange-300 {
+  background-color: rgb(253, 186, 116) !important;
+}
+
+.theme-orange .bg-orange-400 {
+  background-color: rgb(251, 146, 60) !important;
+}
+
+.theme-orange .bg-orange-500 {
+  background-color: rgb(247, 114, 32) !important;
+}
+
+.theme-orange .bg-orange-600 {
+  background-color: rgb(229, 90, 0) !important;
+}
+
+.theme-orange .hover\:bg-orange-600:hover {
+  background-color: rgb(229, 90, 0) !important;
+}
+
+.theme-orange .hover\:bg-orange-200:hover {
+  background-color: rgb(254, 215, 170) !important;
+}
+
+.theme-orange .text-orange-500 {
+  color: rgb(247, 114, 32) !important;
+}
+
+.theme-orange .text-orange-600 {
+  color: rgb(247, 114, 32) !important;
+}
+
+.theme-orange .text-orange-700 {
+  color: rgb(229, 90, 0) !important;
+}
+
+.theme-orange .hover\:text-orange-600:hover {
+  color: rgb(247, 114, 32) !important;
+}
+
+.theme-orange .border-orange-200 {
+  border-color: rgb(254, 215, 170) !important;
+}
+
+.theme-orange .border-orange-500 {
+  border-color: rgb(247, 114, 32) !important;
+}
+
+.theme-orange .focus\:ring-orange-500:focus {
+  --tw-ring-color: rgb(247, 114, 32) !important;
+}
+
+.theme-orange .focus\:border-orange-500:focus {
+  border-color: rgb(247, 114, 32) !important;
+}
+
 /* --------- 蓝色主题 --------- */
 .theme-blue {
   /* 导航栏颜色 */
@@ -269,6 +289,75 @@
 
 .theme-blue .border-brand-primary {
   border-color: rgb(51, 102, 255);
+}
+
+/* 覆盖常用的橙色样式为蓝色 */
+.theme-blue .bg-orange-50 {
+  background-color: rgb(239, 246, 255) !important;
+}
+
+.theme-blue .bg-orange-100 {
+  background-color: rgb(219, 234, 254) !important;
+}
+
+.theme-blue .bg-orange-200 {
+  background-color: rgb(191, 219, 254) !important;
+}
+
+.theme-blue .bg-orange-300 {
+  background-color: rgb(147, 197, 253) !important;
+}
+
+.theme-blue .bg-orange-400 {
+  background-color: rgb(96, 165, 250) !important;
+}
+
+.theme-blue .bg-orange-500 {
+  background-color: rgb(51, 102, 255) !important;
+}
+
+.theme-blue .bg-orange-600 {
+  background-color: rgb(41, 82, 204) !important;
+}
+
+.theme-blue .hover\:bg-orange-600:hover {
+  background-color: rgb(41, 82, 204) !important;
+}
+
+.theme-blue .hover\:bg-orange-200:hover {
+  background-color: rgb(191, 219, 254) !important;
+}
+
+.theme-blue .text-orange-500 {
+  color: rgb(51, 102, 255) !important;
+}
+
+.theme-blue .text-orange-600 {
+  color: rgb(51, 102, 255) !important;
+}
+
+.theme-blue .text-orange-700 {
+  color: rgb(41, 82, 204) !important;
+}
+
+.theme-blue .hover\:text-orange-600:hover {
+  color: rgb(51, 102, 255) !important;
+}
+
+.theme-blue .border-orange-200 {
+  border-color: rgb(191, 219, 254) !important;
+}
+
+.theme-blue .border-orange-500 {
+  border-color: rgb(51, 102, 255) !important;
+}
+
+.theme-blue .focus\:ring-orange-500:focus {
+  --tw-ring-color: rgb(51, 102, 255) !important;
+}
+
+.theme-blue .focus\:border-orange-500:focus {
+  border-color: rgb(51, 102, 255) !important;
 }
 
 /* --------- 绿色主题 --------- */
@@ -317,6 +406,75 @@
   border-color: rgb(16, 185, 129);
 }
 
+/* 覆盖常用的橙色样式为绿色 */
+.theme-green .bg-orange-50 {
+  background-color: rgb(240, 253, 244) !important;
+}
+
+.theme-green .bg-orange-100 {
+  background-color: rgb(220, 252, 231) !important;
+}
+
+.theme-green .bg-orange-200 {
+  background-color: rgb(187, 247, 208) !important;
+}
+
+.theme-green .bg-orange-300 {
+  background-color: rgb(134, 239, 172) !important;
+}
+
+.theme-green .bg-orange-400 {
+  background-color: rgb(74, 222, 128) !important;
+}
+
+.theme-green .bg-orange-500 {
+  background-color: rgb(16, 185, 129) !important;
+}
+
+.theme-green .bg-orange-600 {
+  background-color: rgb(5, 150, 105) !important;
+}
+
+.theme-green .hover\:bg-orange-600:hover {
+  background-color: rgb(5, 150, 105) !important;
+}
+
+.theme-green .hover\:bg-orange-200:hover {
+  background-color: rgb(187, 247, 208) !important;
+}
+
+.theme-green .text-orange-500 {
+  color: rgb(16, 185, 129) !important;
+}
+
+.theme-green .text-orange-600 {
+  color: rgb(16, 185, 129) !important;
+}
+
+.theme-green .text-orange-700 {
+  color: rgb(5, 150, 105) !important;
+}
+
+.theme-green .hover\:text-orange-600:hover {
+  color: rgb(16, 185, 129) !important;
+}
+
+.theme-green .border-orange-200 {
+  border-color: rgb(187, 247, 208) !important;
+}
+
+.theme-green .border-orange-500 {
+  border-color: rgb(16, 185, 129) !important;
+}
+
+.theme-green .focus\:ring-orange-500:focus {
+  --tw-ring-color: rgb(16, 185, 129) !important;
+}
+
+.theme-green .focus\:border-orange-500:focus {
+  border-color: rgb(16, 185, 129) !important;
+}
+
 /* --------- 紫色主题 --------- */
 .theme-purple {
   /* 导航栏颜色 */
@@ -361,6 +519,75 @@
 
 .theme-purple .border-brand-primary {
   border-color: rgb(139, 92, 246);
+}
+
+/* 覆盖常用的橙色样式为紫色 */
+.theme-purple .bg-orange-50 {
+  background-color: rgb(250, 245, 255) !important;
+}
+
+.theme-purple .bg-orange-100 {
+  background-color: rgb(243, 232, 255) !important;
+}
+
+.theme-purple .bg-orange-200 {
+  background-color: rgb(233, 213, 255) !important;
+}
+
+.theme-purple .bg-orange-300 {
+  background-color: rgb(196, 181, 253) !important;
+}
+
+.theme-purple .bg-orange-400 {
+  background-color: rgb(167, 139, 250) !important;
+}
+
+.theme-purple .bg-orange-500 {
+  background-color: rgb(139, 92, 246) !important;
+}
+
+.theme-purple .bg-orange-600 {
+  background-color: rgb(124, 58, 237) !important;
+}
+
+.theme-purple .hover\:bg-orange-600:hover {
+  background-color: rgb(124, 58, 237) !important;
+}
+
+.theme-purple .hover\:bg-orange-200:hover {
+  background-color: rgb(233, 213, 255) !important;
+}
+
+.theme-purple .text-orange-500 {
+  color: rgb(139, 92, 246) !important;
+}
+
+.theme-purple .text-orange-600 {
+  color: rgb(139, 92, 246) !important;
+}
+
+.theme-purple .text-orange-700 {
+  color: rgb(124, 58, 237) !important;
+}
+
+.theme-purple .hover\:text-orange-600:hover {
+  color: rgb(139, 92, 246) !important;
+}
+
+.theme-purple .border-orange-200 {
+  border-color: rgb(233, 213, 255) !important;
+}
+
+.theme-purple .border-orange-500 {
+  border-color: rgb(139, 92, 246) !important;
+}
+
+.theme-purple .focus\:ring-orange-500:focus {
+  --tw-ring-color: rgb(139, 92, 246) !important;
+}
+
+.theme-purple .focus\:border-orange-500:focus {
+  border-color: rgb(139, 92, 246) !important;
 }
 
 /* ========== 通用交互效果样式 ========== */

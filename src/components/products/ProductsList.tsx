@@ -3,7 +3,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { AnimatedProductCard } from './ProductsAnimations'
+import { AnimatedProductCard } from '@/components/ui/animations'
 
 interface ProductsListProps {
   products: Array<{

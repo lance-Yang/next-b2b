@@ -102,7 +102,7 @@ export function AboutUsPage() {
       </div>
 
       {/* Who We Are 区域 */}
-      <section className="bg-mainColorLight py-8 lg:py-20">
+      <section className="bg-brand-light py-8 lg:py-20">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 px-6 lg:px-8">
           {/* 文字内容 */}
           <motion.div
@@ -190,9 +190,9 @@ export function AboutUsPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-mainColorLight p-6 rounded-lg"
+                  className="bg-brand-light p-6 rounded-lg"
                 >
-                  <dd className="text-4xl font-semibold tracking-tight text-mainColorNormal mb-2">
+                  <dd className="text-4xl font-semibold tracking-tight text-brand-primary mb-2">
                     {stat.number}
                   </dd>
                   <dt className="text-sm text-gray-600">{stat.label}</dt>
@@ -237,7 +237,7 @@ export function AboutUsPage() {
       </section>
 
       {/* Our Advantages 区域 */}
-      <section className="py-16 bg-mainColorLight">
+      <section className="py-16 bg-brand-light">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <motion.div
