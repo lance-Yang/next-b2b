@@ -38,101 +38,87 @@
 
 /* 基本CSS变量定义 */
 :root {
-  /* 默认主题色 - 通用变量 */
+  /* ---------- 系统基础变量 ---------- */
   --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
 
-  /* 当前激活的主题色 - 直接设置为橙色 */
+  /* ---------- 全局主题色变量 ---------- */
+  /* 主色系列 - 默认橙色主题 */
   --main-color-light: 22 93% 90%;
   --main-color-normal: 22 93% 55%;
   --main-color-deep: 22 93% 50%;
 
-  /* 也直接设置对应的模板颜色 */
+  /* 导航栏颜色系统 */
+  --nav-primary: 22 93% 55%;  /* 导航栏主色 */
+  --nav-hover: 22 93% 50%;    /* 导航栏悬停色 */
+  --nav-active: 22 93% 40%;   /* 导航栏激活色 */
+
+  /* 品牌颜色系统 */
+  --brand-primary: 22 93% 55%;    /* 主色 */
+  --brand-secondary: 215 100% 50%; /* 辅助色(蓝色) */
+  --brand-accent: 22 93% 60%;     /* 强调色 */
+  --brand-light: 22 93% 90%;      /* 浅色 */
+  --brand-dark: 22 93% 40%;       /* 深色 */
+
+  /* 功能性颜色 */
+  --color-success: 142 76% 36%;  /* 成功色(绿色) */
+  --color-warning: 38 92% 50%;   /* 警告色(黄色) */
+  --color-error: 0 84% 60%;      /* 错误色(红色) */
+  --color-info: 217 91% 60%;     /* 信息色(蓝色) */
+
+  /* ---------- 多模板主题颜色系统 ---------- */
+  /* 默认模板(001) - 橙色系 */
   --main-color-light-001: 22 93% 90%;
   --main-color-normal-001: 22 93% 55%;
   --main-color-deep-001: 22 93% 50%;
 
-  /* ========== 新的动态主题系统 ==========
-       默认主题：橙色系 */
-  --nav-primary: 22 93% 55%;
-  /* 导航栏主色 */
-  --nav-hover: 22 93% 50%;
-  /* 导航栏悬停色 */
-  --nav-active: 22 93% 40%;
-  /* 导航栏激活色 */
-
-  /* 品牌主题色板 */
-  --brand-primary: 22 93% 55%;
-  /* 主色 */
-  --brand-secondary: 215 100% 50%;
-  /* 辅助色 (蓝色) */
-  --brand-accent: 22 93% 60%;
-  /* 强调色 */
-  --brand-light: 22 93% 90%;
-  /* 浅色 */
-  --brand-dark: 22 93% 40%;
-  /* 深色 */
-
-  /* 功能性颜色 */
-  --color-success: 142 76% 36%;
-  /* 成功色 (绿色) */
-  --color-warning: 38 92% 50%;
-  /* 警告色 (黄色) */
-  --color-error: 0 84% 60%;
-  /* 错误色 (红色) */
-  --color-info: 217 91% 60%;
-  /* 信息色 (蓝色) */
-
-  /* 模板主题颜色系统 */
-  /* 模板02的颜色 */
+  /* 模板002 - 浅橙色系 */
   --main-color-light-002: 36 100% 95%;
   --main-color-normal-002: 36 100% 46%;
   --main-color-deep-002: 36 100% 40%;
 
-  /* 模板03的颜色 */
+  /* 模板003 - 浅黄色系 */
   --main-color-light-003: 37 56% 95%;
   --main-color-normal-003: 37 56% 57%;
   --main-color-deep-003: 37 56% 50%;
 
-  /* 模板04的颜色 */
+  /* 模板004 - 蓝色系 */
   --main-color-light-004: 215 100% 95%;
   --main-color-normal-004: 215 100% 30%;
   --main-color-deep-004: 215 100% 26%;
 
-  /* 模板05的颜色 */
+  /* 模板005 - 浅蓝色系 */
   --main-color-light-005: 216 100% 95%;
   --main-color-normal-005: 216 100% 50%;
   --main-color-deep-005: 216 100% 40%;
 
-  /* 模板06的颜色 */
+  /* 模板006 - 粉色系 */
   --main-color-light-006: 331 95% 95%;
   --main-color-normal-006: 331 95% 68%;
   --main-color-deep-006: 331 78% 63%;
 
-  /* 模板07的颜色 */
+  /* 模板007 - 红色系 */
   --main-color-light-007: 0 91% 95%;
   --main-color-normal-007: 0 91% 55%;
   --main-color-deep-007: 0 91% 63%;
 
-  /* 模板08的颜色 */
+  /* 模板008 - 绿色系 */
   --main-color-light-008: 136 60% 90%;
   --main-color-normal-008: 136 60% 43%;
   --main-color-deep-008: 136 60% 35%;
 
-  /* 模板09的颜色 */
+  /* 模板009 - 薄荷绿 */
   --main-color-light-009: 123 42% 90%;
   --main-color-normal-009: 123 42% 56%;
   --main-color-deep-009: 123 42% 50%;
 
-  /* 模板10的颜色 */
+  /* 模板010 - 橙色系(备用) */
   --main-color-light-010: 22 93% 90%;
   --main-color-normal-010: 22 93% 55%;
   --main-color-deep-010: 22 93% 50%;
 }
 
-.btn {
-  /* @apply bg-blue-500 hover: bg-blue-700 text-white font-bold py-2 px-4 rounded dark:bg-yellow-500 dark:hover:bg-green-500 */
-}
+/* Tailwind基于的按钮样式已通过类组合实现，无需单独定义 */
 
 @layer base {
   :root {
@@ -191,14 +177,16 @@
   }
 }
 
-/* ========== 自定义主题CSS - 使用CSS类而非CSSS变量 ========== */
+/* ========== 自定义主题CSS - 使用CSS类而非CSS变量 ========== */
 
-/* 橙色主题 */
+/* --------- 橙色主题 --------- */
 .theme-orange {
+  /* 导航栏颜色 */
   --nav-primary-rgb: 247, 114, 32;
   --nav-hover-rgb: 229, 90, 0;
   --nav-active-rgb: 200, 75, 0;
 
+  /* 品牌颜色 */
   --brand-primary-rgb: 247, 114, 32;
   --brand-secondary-rgb: 51, 153, 255;
   --brand-light-rgb: 255, 239, 230;
@@ -237,12 +225,14 @@
   border-color: rgb(247, 114, 32);
 }
 
-/* 蓝色主题 */
+/* --------- 蓝色主题 --------- */
 .theme-blue {
+  /* 导航栏颜色 */
   --nav-primary-rgb: 51, 102, 255;
   --nav-hover-rgb: 41, 82, 204;
   --nav-active-rgb: 31, 62, 153;
 
+  /* 品牌颜色 */
   --brand-primary-rgb: 51, 102, 255;
   --brand-secondary-rgb: 247, 114, 32;
   --brand-light-rgb: 230, 237, 255;
@@ -281,12 +271,14 @@
   border-color: rgb(51, 102, 255);
 }
 
-/* 绿色主题 */
+/* --------- 绿色主题 --------- */
 .theme-green {
+  /* 导航栏颜色 */
   --nav-primary-rgb: 16, 185, 129;
   --nav-hover-rgb: 5, 150, 105;
   --nav-active-rgb: 4, 120, 87;
 
+  /* 品牌颜色 */
   --brand-primary-rgb: 16, 185, 129;
   --brand-secondary-rgb: 139, 92, 246;
   --brand-light-rgb: 230, 253, 240;
@@ -325,12 +317,14 @@
   border-color: rgb(16, 185, 129);
 }
 
-/* 紫色主题 */
+/* --------- 紫色主题 --------- */
 .theme-purple {
+  /* 导航栏颜色 */
   --nav-primary-rgb: 139, 92, 246;
   --nav-hover-rgb: 124, 58, 237;
   --nav-active-rgb: 109, 40, 217;
 
+  /* 品牌颜色 */
   --brand-primary-rgb: 139, 92, 246;
   --brand-secondary-rgb: 16, 185, 129;
   --brand-light-rgb: 243, 237, 255;
@@ -369,12 +363,12 @@
   border-color: rgb(139, 92, 246);
 }
 
-/* 通用样式 */
+/* ========== 通用交互效果样式 ========== */
 .theme-transition {
   transition: all 0.3s ease;
 }
 
-/* 悬停效果增强 */
+/* 导航项悬停效果 */
 .nav-item {
   transition: color 0.2s ease;
   position: relative;
@@ -384,7 +378,7 @@
   transform: translateY(-1px);
 }
 
-/* 按钮样式 */
+/* 按钮交互效果 */
 .theme-button {
   transition: all 0.2s ease;
   position: relative;
@@ -400,7 +394,7 @@
   transform: translateY(0);
 }
 
-/* 卡片样式 */
+/* 卡片悬停效果 */
 .theme-card {
   transition: all 0.3s ease;
 }
@@ -410,7 +404,9 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
-/* Hero Swiper 自定义样式 */
+/* ========== Swiper组件自定义样式 ========== */
+
+/* 轮播指示器样式 */
 .hero-swiper .swiper-pagination-bullet {
   background: rgba(255, 255, 255, 0.5) !important;
   width: 12px !important;
@@ -429,7 +425,7 @@
   background: rgba(255, 255, 255, 0.75) !important;
 }
 
-/* Fade 效果优化 */
+/* 轮播切换效果 */
 .hero-swiper .swiper-slide {
   opacity: 0 !important;
   transition-property: opacity !important;
@@ -439,7 +435,7 @@
   opacity: 1 !important;
 }
 
-/* Swiper 导航按钮优化 */
+/* 轮播导航按钮 */
 .hero-swiper .swiper-button-prev,
 .hero-swiper .swiper-button-next {
   color: white !important;
@@ -457,7 +453,9 @@
   transform: scale(1.1) !important;
 }
 
-/* 产品分类卡片动画优化 */
+/* ========== 性能优化样式 ========== */
+
+/* 产品分类卡片性能优化 */
 .product-category-card {
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
