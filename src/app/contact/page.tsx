@@ -4,11 +4,11 @@ import Image from "next/image";
 import {
   AnimatedTitle,
   AnimatedNav,
-  AnimatedHeading,
   AnimatedCard as AnimatedProductCard,
   AnimatedLinkArea,
 } from "@/components/ui/animations";
 import ContactForm from "@/components/contact/ContactForm";
+import SectionTitle from "@/components/contact/SectionTitle";
 
 // 类型定义
 type ContactInfo = {
@@ -138,20 +138,6 @@ export default function ContactPage() {
         </div>
       </div>
     </div>
-  );
-
-  const SectionTitle = ({ title, subtitle }: { title: string, subtitle?: string }) => (
-    <AnimatedHeading>
-      <div className="w-16 h-1 bg-orange-500 mx-auto mb-4" />
-      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-        {title}
-      </h2>
-      {subtitle && (
-        <p className="text-gray-600 max-w-2xl mx-auto">
-          {subtitle}
-        </p>
-      )}
-    </AnimatedHeading>
   );
 
   const ProductCard = ({ product }: { product: Product }) => (
