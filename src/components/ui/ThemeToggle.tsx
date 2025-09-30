@@ -65,6 +65,51 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     // 添加新主题类
     htmlElement.classList.add(theme.className);
 
+    // 动态更新CSS变量
+    const style = htmlElement.style;
+
+    if (themeKey === 'orange') {
+      style.setProperty('--main-color-light', '22 93% 90%');
+      style.setProperty('--main-color-normal', '22 93% 55%');
+      style.setProperty('--main-color-deep', '22 93% 50%');
+      style.setProperty('--nav-primary', '22 93% 55%');
+      style.setProperty('--nav-hover', '22 93% 50%');
+      style.setProperty('--nav-active', '22 93% 40%');
+      style.setProperty('--brand-primary', '22 93% 55%');
+      style.setProperty('--brand-light', '22 93% 90%');
+      style.setProperty('--brand-dark', '22 93% 40%');
+    } else if (themeKey === 'blue') {
+      style.setProperty('--main-color-light', '215 100% 95%');
+      style.setProperty('--main-color-normal', '215 100% 50%');
+      style.setProperty('--main-color-deep', '215 100% 40%');
+      style.setProperty('--nav-primary', '215 100% 50%');
+      style.setProperty('--nav-hover', '215 100% 40%');
+      style.setProperty('--nav-active', '215 100% 30%');
+      style.setProperty('--brand-primary', '215 100% 50%');
+      style.setProperty('--brand-light', '215 100% 95%');
+      style.setProperty('--brand-dark', '215 100% 30%');
+    } else if (themeKey === 'green') {
+      style.setProperty('--main-color-light', '142 76% 90%');
+      style.setProperty('--main-color-normal', '142 76% 36%');
+      style.setProperty('--main-color-deep', '142 76% 30%');
+      style.setProperty('--nav-primary', '142 76% 36%');
+      style.setProperty('--nav-hover', '142 76% 30%');
+      style.setProperty('--nav-active', '142 76% 25%');
+      style.setProperty('--brand-primary', '142 76% 36%');
+      style.setProperty('--brand-light', '142 76% 90%');
+      style.setProperty('--brand-dark', '142 76% 25%');
+    } else if (themeKey === 'purple') {
+      style.setProperty('--main-color-light', '258 90% 95%');
+      style.setProperty('--main-color-normal', '258 90% 66%');
+      style.setProperty('--main-color-deep', '258 90% 58%');
+      style.setProperty('--nav-primary', '258 90% 66%');
+      style.setProperty('--nav-hover', '258 90% 58%');
+      style.setProperty('--nav-active', '258 90% 50%');
+      style.setProperty('--brand-primary', '258 90% 66%');
+      style.setProperty('--brand-light', '258 90% 95%');
+      style.setProperty('--brand-dark', '258 90% 50%');
+    }
+
     // 保存到localStorage
     localStorage.setItem('preferred-theme', themeKey);
     setCurrentTheme(themeKey);
