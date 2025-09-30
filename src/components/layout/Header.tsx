@@ -65,7 +65,7 @@ export function Header() {
           <div className="hidden lg:-ml-20 lg:flex lg:flex-1 items-center justify-center">
             <Link
               className={cn(
-                "px-0 flex items-center justify-center  hover:text-navHover theme-transition text-base/6 font-semibold nav-item",
+                "px-0 flex items-center justify-center  hover:text-mainColorNormal theme-transition text-base/6 font-semibold nav-item",
                 isActive('/') && "text-mainColorNormal"
               )}
               href="/"

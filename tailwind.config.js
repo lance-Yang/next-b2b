@@ -68,40 +68,14 @@ module.exports = {
                     '5': 'hsl(var(--chart-5))'
                 },
                 // ========== 主题色 - 使用CSS变量，可通过JavaScript动态修改 ==========
-                // 导航栏主题色
-                navPrimary: 'hsl(var(--nav-primary))',
-                navHover: 'hsl(var(--nav-hover))',
-                navActive: 'hsl(var(--nav-active))',
-                
-                // 品牌主题色板 - 使用CSS变量
+                // 品牌主题色板 - 仅保留正在使用的颜色
                 brand: {
                     primary: 'hsl(var(--brand-primary))',
-                    secondary: 'hsl(var(--brand-secondary))',
-                    accent: 'hsl(var(--brand-accent))',
                     light: 'hsl(var(--brand-light))',
-                    dark: 'hsl(var(--brand-dark))',
                 },
-                
-                // 功能性颜色 - 使用CSS变量
-                custom: {
-                    success: 'hsl(var(--color-success))',
-                    warning: 'hsl(var(--color-warning))',
-                    error: 'hsl(var(--color-error))',
-                    info: 'hsl(var(--color-info))',
-                },
-                // 主题色 - 使用CSS变量，可通过JavaScript动态修改
-                mainColorLight: 'hsl(var(--main-color-light))',
+
+                // 主题色 - 仅保留正在使用的颜色
                 mainColorNormal: 'hsl(var(--main-color-normal))',
-                mainColorDeep: 'hsl(var(--main-color-deep))',
-                // 添加主题色透明度变体
-                mainColorNormalAlpha: {
-                    80: 'hsla(var(--main-color-normal), 0.8)',
-                    70: 'hsla(var(--main-color-normal), 0.7)',
-                    50: 'hsla(var(--main-color-normal), 0.5)',
-                    30: 'hsla(var(--main-color-normal), 0.3)',
-                    20: 'hsla(var(--main-color-normal), 0.2)',
-                    10: 'hsla(var(--main-color-normal), 0.1)'
-                }
             },
             fontFamily: {},
             borderRadius: {
