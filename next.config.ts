@@ -17,25 +17,14 @@ const nextConfig: NextConfig = {
   },
   // 启用压缩
   compress: true,
-  // 其他配置
+  // 实验性功能配置
   experimental: {
     // 启用进一步的图片优化
     optimizePackageImports: ['framer-motion', 'lucide-react', 'swiper'],
-    // 启用服务器组件优化
-    serverComponentsExternalPackages: [],
   },
-  // 生产环境优化
-  swcMinify: true,
-  // 启用静态资源优化
-  assetPrefix: process.env.NODE_ENV === 'production' ? '' : '',
-  // 配置缓存策略
-  generateBuildId: async () => {
-    return 'next-b2b-build';
-  },
-  // 优化输出
-  output: 'standalone',
-  // 禁用不必要的功能
-  distDir: '.next',
+  // 服务器外部包（替代过时的 serverComponentsExternalPackages）
+  serverExternalPackages: [],
+
   // 配置重定向（如果需要）
   async redirects() {
     return [];
